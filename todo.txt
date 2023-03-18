@@ -1,0 +1,37 @@
+Faire les fichiers avec les automates
+lecture d'un fichier
+stackage de l'automate (tableau de dico) + des états finaux/initiaux
+
+Test:
+    standard?
+    deterministe?
+    Complet?
+
+Standardisation (au choix de l'utilisateur)
+
+Determinisation et completion
+
+//
+Minimalisation
+
+Reconnaissance des mots (D a faire avant)
+
+Complémentarisation
+
+
+
+
+
+
+
+
+
+The text file representing an automaton read by your program may have the following
+syntax (but you may prefer a slightly different structure if you wish):
+Line 1: number of symbols in the automaton’s alphabet.
+Line 2: number of states.
+Line 3: number of initial states, followed by their numeric labels.
+Line 4: number of final states, followed by their numeric labels.
+Line 5: number of transitions.
+Lines 6 and the following lines: transitions in the form
+<source state><symbol><target state >
