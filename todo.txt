@@ -44,8 +44,4 @@ Line 3: is,is,...
 Line 4: fs,fs...
 Line 5: number of transitions.
 Lines 6 and the following lines: transitions in the form
-<<<<<<< HEAD
 0,a,0
-=======
-<source state><symbol><target state >
->>>>>>> ef2d3f624b9cb215318b6a982fb0ffecad848b19
