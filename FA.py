@@ -1,5 +1,6 @@
 import information as info
 import display as disp
+import algo as algo
 
 
 # create a dictionnary table
@@ -69,12 +70,6 @@ def main():
     else:
         return
 
-def if_empty_word(dico, init, final, alphabet):
-    for i in range(len(init)):
-        if init[i] == 1 and final[i] == 1:
-            return True
-    return False
-
 
 def tests (dico, init, final, alphabet):
     if info.is_standard(dico, init, final, alphabet):
@@ -90,35 +85,3 @@ def tests (dico, init, final, alphabet):
 
     main()
 
-
-def standardization(dico, init, final, alphabet):
-    if (info.is_standard(dico, init, final, alphabet)):
-        return dico, init, final
-    else:
-        #add a new state
-        if (if_empty_word(dico, init, final, alphabet)):
-            final.append(1)
-        else:
-            final.append(0)
-        init.append(1)
-        dico.append({})
-        # add the transitions to the new state
-        for lettre in alphabet:
-            dico[len(dico) - 1][lettre] = [-1]
-        for state in range(len(dico) - 1):
-            for lettre in alphabet:
-                if (init[state] == 1):
-                    if (dico[state][lettre] != [-1]):
-                        if (dico[len(dico) - 1][lettre] == [-1]):
-                            dico[len(dico) - 1][lettre] = []
-                        for transition in dico[state][lettre]:
-                            if (transition not in dico[len(dico) - 1][lettre]):
-                                dico[len(dico) - 1][lettre].append(transition)
-        for i in range(len(init) - 1):
-            init[i] = 0
-        return dico, init, final
-
-standardization(dico, init, final, alphabet)
-disp.display_table(dico, init, final, alphabet)
-info.is_standard(dico, init, final, alphabet)
-info.is_deterministic(dico, init, final, alphabet)
