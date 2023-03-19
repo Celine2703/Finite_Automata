@@ -1,5 +1,5 @@
-#creer un tableau de dictionnaires
 
+#creer un tableau de dictionnaires
 def create_dict_array(n):
     dict_array = []
     for i in range(n):
@@ -35,6 +35,12 @@ init[0] = 1
 final = create_final_array(3)
 final[0] = 1
 
+def if_empty(dico, init, final, alphabet):
+    for i in range(len(init)):
+        if init[i] == 1 and final[i] == 1:
+            return True
+    return False
+
 def is_standard(dico, init, final, alphabet):
     initstate = -1
     #test if there is only one initial state
@@ -54,7 +60,27 @@ def is_standard(dico, init, final, alphabet):
                     return False
     return True
 
-print(is_standard(dico, init, final, alphabet))
+is_standard(dico, init, final, alphabet)
+
+def is_deterministic(dico, init, final, alphabet):
+    initstate = -1
+    #test if there is only one initial state
+    for i in range(len(init)):
+        if init[i] != 0:
+            if initstate == -1:
+                initstate = i
+            else:
+                print("Not deterministic: more than one initial state")
+                return False
+    #test if there is more than one transition for a letter
+    for i in range (len(dico)):
+        for j in range(len(alphabet)):
+            if len(dico[i][alphabet[j]]) > 1:
+                print("Not deterministic: more than one transition for letter '", alphabet[j], "' in state", i)
+                return False
+    return True
+
+is_deterministic(dico, init, final, alphabet)
 
 def is_complete(dico, init, final, alphabet):
     for i in range(len(dico)):
@@ -64,15 +90,23 @@ def is_complete(dico, init, final, alphabet):
                 return False
     return True
 
-print(is_complete(dico, init, final, alphabet))
+is_complete(dico, init, final, alphabet)
 
-def standardization(dico, init, final, alphabet):
+'''def standardization(dico, init, final, alphabet):
     if is_standard(dico, init, final, alphabet):
         return dico, init, final
     else:
         #add a new state
+        if (if_empty(dico, init, final, alphabet)):
+            final.append(1)
+        else
+            final.append(0)
+        init.append(1)
+        dico.append({})
+        for i in range(len(alphabet)):
+            dico[len(dico) - 1][alphabet[i]] = [-1]
+        
         return dico, init, final
     
-print(standardization(dico, init, final, alphabet))
+print(standardization(dico, init, final, alphabet))'''
 
-#def is_deterministic(dico, init, final, alphabet):
