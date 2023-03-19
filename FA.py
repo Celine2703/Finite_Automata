@@ -1,4 +1,5 @@
 import information as info
+import display as disp
 
 
 # create a dictionnary table
@@ -21,7 +22,6 @@ def create_final_array(n):
     for i in range(n):
         final_array.append(0)
     return final_array
-
 
 def open_file(num):
     #opening and saving lines of the automata file
@@ -69,7 +69,6 @@ def main():
     else:
         return
 
-
 def if_empty(dico, init, final, alphabet):
     for i in range(len(init)):
         if init[i] == 1 and final[i] == 1:
@@ -86,6 +85,8 @@ def tests (dico, init, final, alphabet):
 
     if info.is_complete(dico, init, final, alphabet):
         print("Complete!!")
+        
+    disp.display_table(dico, init, final, alphabet)
 
     main()
 
@@ -97,13 +98,13 @@ main()
     else:
         #add a new state
         if (if_empty(dico, init, final, alphabet)):
-            final.append(1)
+            final.insert(0,1)
         else
-            final.append(0)
-        init.append(1)
-        dico.append({})
+            final.insert(0,0)
+        init.insert(0,1)
+        dico.insert(0,{})
         for i in range(len(alphabet)):
-            dico[len(dico) - 1][alphabet[i]] = [-1]
+            dico[0][alphabet[i]] = [-1]
         
         return dico, init, final
     

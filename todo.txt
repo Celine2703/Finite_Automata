@@ -9,8 +9,9 @@ lecture d'un fichier txt
 stockage de l'automate dans les structures (tableau de dico) + des états finaux/initiaux
 Menu (+loop)
 
-
 CODEUR 2 (Céline)
+affichage de l'automate FAIT
+
 Test:
     standard? FAIT
     deterministe?FAIT
@@ -33,14 +34,14 @@ Complémentarisation
 
 
 
-
+group 6
 
 The text file representing an automaton read by your program may have the following
 syntax (but you may prefer a slightly different structure if you wish):
-Line 1: the automaton’s alphabet.
+Line 1: the automaton’s alphabet. a,b,c...
 Line 2: number of states.
-Line 3: number of initial states, followed by their numeric labels.
-Line 4: number of final states, followed by their numeric labels.
+Line 3: is,is,...
+Line 4: fs,fs...
 Line 5: number of transitions.
 Lines 6 and the following lines: transitions in the form
-<source state><symbol><target state >
+0,a,0
