@@ -1,5 +1,5 @@
-
 import information as info
+import display as disp
 
 #creer un tableau de dictionnaires
 def create_dict_array(n):
@@ -31,11 +31,12 @@ dico[1]['a'] = [1]
 dico[1]['b'] = [2]
 dico[2]['a'] = [-1]
 dico[2]['b'] = [-1]
-print(dico)
 init = create_init_array(3)
 init[0] = 1
 final = create_final_array(3)
 final[0] = 1
+
+disp.display_table(dico, init, final, alphabet)
 
 def if_empty(dico, init, final, alphabet):
     for i in range(len(init)):
@@ -55,13 +56,13 @@ info.is_complete(dico, init, final, alphabet)
     else:
         #add a new state
         if (if_empty(dico, init, final, alphabet)):
-            final.append(1)
+            final.insert(0,1)
         else
-            final.append(0)
-        init.append(1)
-        dico.append({})
+            final.insert(0,0)
+        init.insert(0,1)
+        dico.insert(0,{})
         for i in range(len(alphabet)):
-            dico[len(dico) - 1][alphabet[i]] = [-1]
+            dico[0][alphabet[i]] = [-1]
         
         return dico, init, final
     
