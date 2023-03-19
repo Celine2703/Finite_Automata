@@ -8,6 +8,7 @@ CODEUR 1 (Thaïs)
 lecture d'un fichier txt
 stockage de l'automate dans les structures (tableau de dico) + des états finaux/initiaux
 Menu (+loop)
+lecture de mots (ATTENTION lis bien le sujet on doit pouvoir lire plusieurs mots a la fois -> on se call si pb)
 
 CODEUR 2 (Céline)
 affichage de l'automate FAIT
@@ -26,15 +27,15 @@ Determinisation & completion DOING & FAIT
 //
 Minimalisation
 
-Reconnaissance des mots (D a faire avant)
+Recognize_word (a appeler avec un automate deterministe) FAIT
 
-Complémentarisation
-
-
+Complémentarisation FAIT
 
 
 
 
+
+---------------------------------------------------------------------------------
 
 group 6
 
