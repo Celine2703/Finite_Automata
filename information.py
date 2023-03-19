@@ -9,12 +9,13 @@ def is_standard(dico, init, final, alphabet):
                 print("Not standard: more than one initial state")
                 return False
     #test if there is a transition to the initial state
-    for i in range(len(dico)):
-        for j in range(len(alphabet)):
-            for k in range(len(dico[i][alphabet[j]])):
-                if dico[i][alphabet[j]][k] == initstate:
+    for state in dico:
+        for lettre in alphabet:
+            for transition in state[lettre]:
+                if transition == initstate:
                     print("Not standard: transition to initial state")
                     return False
+    print("The automaton is standard")
     return True
 
 def is_deterministic(dico, init, final, alphabet):
@@ -29,16 +30,18 @@ def is_deterministic(dico, init, final, alphabet):
                 return False
     #test if there is more than one transition for a letter
     for i in range (len(dico)):
-        for j in range(len(alphabet)):
-            if len(dico[i][alphabet[j]]) > 1:
-                print("Not deterministic: more than one transition for letter '", alphabet[j], "' in state", i)
+        for lettre in alphabet:
+            if len(dico[i][lettre]) > 1:
+                print("Not deterministic: more than one transition for letter '", lettre, "' in state", i)
                 return False
+    print("The automaton is deterministic")
     return True
 
 def is_complete(dico, init, final, alphabet):
-    for i in range(len(dico)):
-        for j in range(len(alphabet)):
-            if dico[i][alphabet[j]] == -1:
+    for state in dico:
+        for lettre in alphabet:
+            if state[lettre] == [-1]:
                 print("Not complete: transition to nowhere")
                 return False
+    print("The automaton is complete")
     return True

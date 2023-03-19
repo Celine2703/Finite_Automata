@@ -4,7 +4,7 @@ def display_ligne(dico, init, final, alphabet, i):
     tab = []
     tab.append('')
     if (init[i] == 1):
-        tab[0] += 'I'
+        tab[0] += 'I '
     if (final[i] == 1):
         tab[0] += 'F'
     tab.append(i)
