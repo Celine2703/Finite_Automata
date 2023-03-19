@@ -62,26 +62,44 @@ def open_file(num):
 
 def main():
     #the menu of our program
-    global dico, init, final, alphabet
     print("\nWhich file do you want to open? (type -1 to quit)")
     x = int(input("-"))
+    dico, init, final, alphabet = open_file(x)
+    disp.display_table(dico, init, final, alphabet)
     if x != -1:
-        return tests(open_file(x)[0],open_file(x)[1],open_file(x)[2],open_file(x)[3])
+        print("\nWhat do you want to do?\n 1)Is it standard?\n 2)Is it deterministic?\n 3)Is it complete?\n 4)Standardisation\n 5)Determinization\n 6)Completion\n 7)Minimization\n 8)Read a word\n")
+        x = int(input("-"))
+        if x == 1:
+            if info.is_standard(dico, init, final, alphabet):
+                print("It is standard!")
+        elif x==2:
+            if info.is_deterministic(dico, init, final, alphabet):
+                print("It is deterministic!")
+        elif x==3:
+            if info.is_complete(dico, init, final, alphabet):
+                print("It is complete!")
+        elif x==4:
+            dico, init, final = algo.standardization(dico, init, final, alphabet)
+            disp.display_table(dico, init, final, alphabet)
+        elif x==5:
+            dico, init, final = algo.determinization(dico, init, final, alphabet)
+            disp.display_table(dico, init, final, alphabet)
+        elif x==6:
+            dico, init, final = algo.completion(dico, init, final, alphabet)
+            disp.display_table(dico, init, final, alphabet)
+        elif x==7:
+            dico, init, final = algo.minimization(dico, init, final, alphabet)
+            disp.display_table(dico, init, final, alphabet)
+        elif x==8:
+            print("Input a word please. (type 'end' if you want to return to the menu)")
+            w = input("-")
+            while w != "end":
+                algo.recognize_word(dico, init, final, alphabet,w)
+                print("Input a word please. (type 'end' if you want to return to the menu)")
+                w = input("-")
+        main()
     else:
         return
 
 
-def tests (dico, init, final, alphabet):
-    if info.is_standard(dico, init, final, alphabet):
-        print("Standard!!")
-
-    if info.is_deterministic(dico, init, final, alphabet):
-        print("Deterministic!!")
-
-    if info.is_complete(dico, init, final, alphabet):
-        print("Complete!!")
-        
-    disp.display_table(dico, init, final, alphabet)
-
-    main()
-
+main()
