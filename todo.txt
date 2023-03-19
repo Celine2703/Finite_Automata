@@ -1,9 +1,13 @@
-CODEUR 1:
-Faire les fichiers avec les automates
-lecture d'un fichier
-stockage de l'automate dans les structures (tableau de dico) + des états finaux/initiaux
-Menu :
+TRADUCTEUR (Théo)
+Faire les fichiers txt avec les automates
 
+PRESENTATEUR (Timéo)
+Faire le ppt de 15min
+
+CODEUR 1 (Thaïs)
+lecture d'un fichier txt
+stockage de l'automate dans les structures (tableau de dico) + des états finaux/initiaux
+Menu (+loop)
 
 
 CODEUR 2 (Céline)
