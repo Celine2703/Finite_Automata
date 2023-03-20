@@ -22,18 +22,21 @@ final=create_array(3)
 final[2]=1
 alphabet=['a','b']
 dico=create_dict_array(3)
-dico[0]['a']=[1]
+dico[0]['a']=[1, 2]
 dico[0]['b']=[2]
-dico[1]['a']=[2]
+dico[1]['a']=[1, 2]
 dico[1]['b']=[-1]
 dico[2]['a']=[-1]
 dico[2]['b']=[1]
 
-info.is_complete(dico, init, final, alphabet)
+# info.is_complete(dico, init, final, alphabet)
 disp.display_table(dico, init, final, alphabet)
-algo.completion(dico, init, final, alphabet)
+# algo.completion(dico, init, final, alphabet)
 print("\n")
+print(dico)
+algo.determinization(dico, init, final, alphabet)
+print(dico)
 disp.display_table(dico, init, final, alphabet)
-info.is_standard(dico, init, final, alphabet)
-info.is_deterministic(dico, init, final, alphabet)
-info.is_complete(dico, init, final, alphabet)
+# info.is_standard(dico, init, final, alphabet)
+# info.is_deterministic(dico, init, final, alphabet)
+# info.is_complete(dico, init, final, alphabet)

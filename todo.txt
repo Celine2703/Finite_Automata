@@ -31,8 +31,8 @@ Recognize_word (a appeler avec un automate deterministe) FAIT
 
 Complémentarisation FAIT
 
-
-
+renommer les fichiers
+Commenter
 
 
 ---------------------------------------------------------------------------------
