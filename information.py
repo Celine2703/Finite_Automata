@@ -27,7 +27,6 @@ def is_standard(dico, init, final, alphabet):
                 if transition == initstate:
                     print("Not standard: transition to initial state")
                     return False
-    print("The automaton is standard")
     return True
 
 def is_deterministic(dico, init, final, alphabet):
@@ -46,7 +45,6 @@ def is_deterministic(dico, init, final, alphabet):
             if len(dico[i][lettre]) > 1:
                 print("Not deterministic: more than one transition for letter '", lettre, "' in state", i)
                 return False
-    print("The automaton is deterministic")
     return True
 
 def is_complete(dico, init, final, alphabet):
@@ -55,5 +53,4 @@ def is_complete(dico, init, final, alphabet):
             if state[lettre] == [-1]:
                 print("Not complete: transition to nowhere")
                 return False
-    print("The automaton is complete")
     return True

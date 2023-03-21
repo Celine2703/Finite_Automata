@@ -101,12 +101,12 @@ def recognize_word(dico, init, final, alphabet, word):
     for i in range(len(init)):
         if (init[i] == 1):
             state = i
-    for lettre in word:
-        if(dico[state][lettre] == [-1]):
-            return False
-        else:
-            state = dico[state][lettre][0]
-    if (final[state] == 1):
-        return True
+            for lettre in word:
+                if(dico[state][lettre] == [-1]):
+                    return False
+                else:
+                    state = dico[state][lettre][0]
+            if (final[state] == 1):
+                return True
     else:
         return False
