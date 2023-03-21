@@ -16,18 +16,20 @@ def create_array(n):
         init_array.append(0)
     return init_array
 
-init=create_array(3)
+init=create_array(4)
 init[0]=1
-final=create_array(3)
+final=create_array(4)
 final[2]=1
 alphabet=['a','b']
-dico=create_dict_array(3)
-dico[0]['a']=[1, 2]
-dico[0]['b']=[2]
-dico[1]['a']=[1, 2]
-dico[1]['b']=[-1]
+dico=create_dict_array(4)
+dico[0]['a']=[1]
+dico[0]['b']=[-1]
+dico[1]['a']=[1, 3]
+dico[1]['b']=[2]
 dico[2]['a']=[-1]
-dico[2]['b']=[1]
+dico[2]['b']=[-1]
+dico[3]['a']=[2]
+dico[3]['b']=[2,3]
 
 # info.is_complete(dico, init, final, alphabet)
 disp.display_table(dico, init, final, alphabet)

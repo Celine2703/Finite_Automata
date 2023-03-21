@@ -4,6 +4,12 @@ def if_empty_word(dico, init, final, alphabet):
             return True
     return False
 
+def is_final_state(final, state):
+    for i in state:
+        if final[i] == 1:
+            return True
+    return False
+
 def is_standard(dico, init, final, alphabet):
     initstate = -1
     #test if there is only one initial state
