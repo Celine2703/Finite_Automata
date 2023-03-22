@@ -1,3 +1,7 @@
+une fonction qui prend en qrgument une liste de int et un int et renvoie une liste de int triée
+bisect.insort(sorted(mylist), new_int)
+import bisect
+
 TRADUCTEUR (Théo)
 Faire les fichiers txt avec les automates
 

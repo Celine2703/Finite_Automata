@@ -17,8 +17,12 @@ def create_array(n):
 def open_file(num):
     # opening and saving lines of the automata file
     name_file = "Int2-6-" + str(num) + ".txt"
-    with open(name_file, 'r') as f:
-        lines = f.readlines()
+    try:
+        with open(name_file, 'r') as f:
+            lines = f.readlines()
+    except:
+        print("Error: file not found")
+        exit(1)
 
     # creating a list of the characters of the alphabet
     alphabet = lines[0].split(",")

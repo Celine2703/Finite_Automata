@@ -9,7 +9,8 @@ def print_menu():
     print("2- Determinization and completion")
     print("3- Minimization")
     print("4- Read a word")
-    print("5- Select another automaton")
+    print("5- Complementary automaton")
+    print("6- Select another automaton")
     print("0- Quit\n")
 
 def test_automaton(dico, init, final, alphabet):
@@ -31,7 +32,7 @@ def test_automaton(dico, init, final, alphabet):
     if x == -1:
         print("The automaton is complete")
     else:
-        print("Not complete: transition to nowhere")
+        print("Not complete: transition to nowhere in state", x)
 
 
 def main():
@@ -52,23 +53,24 @@ def main():
             if info.is_standard(dico, init, final, alphabet) == -1:
                 print("This automaton is already standard.")
             else:
-                print("Standardization done, the automaton is now:")
                 dico, init, final = algo.standardization(dico, init, final, alphabet)
+                print("Standardization done, the automaton is now:")
                 disp.display_table(dico, init, final, alphabet)
         elif y == 2:
-            #if info.is_deterministic(dico, init, final, alphabet) == -1:
-                #print("This automaton is already deterministic.")
-            if info.is_complete(dico, init, final, alphabet) == -1:
-                print("This automaton is already complete.")
-            elif info.is_complete(dico, init, final, alphabet) == 0:
-                dico, init, final = algo.completion(dico, init, final, alphabet)
-                print("Completion done, the CFDA is:")
-                disp.display_table(dico, init, final, alphabet)
+            if info.is_deterministic(dico, init, final, alphabet) == -1:
+                if info.is_complete(dico, init, final, alphabet) == -1:
+                    print("This automaton is already deterministic and complete.")
+                else:
+                    algo.completion(dico, init, final, alphabet)
+                    print("Completion done, the automaton is now:")
             else:
-                dico, init, final = algo.completion(dico, init, final, alphabet)
-                dico, init, final = algo.determinization(dico, init, final, alphabet)
-                print("Completion and determinization complete, the CDFA is:")
-                disp.display_table(dico, init, final, alphabet)
+                algo.determinization(dico, init, final, alphabet)
+                if info.is_complete(dico, init, final, alphabet) == -1:
+                    print("Determinization done, the automaton is already complete, it is now:")
+                else:
+                    dico, init, final = algo.completion(dico, init, final, alphabet)
+                    print("Determinization and completion done, the automaton is now:")
+            disp.display_table(dico, init, final, alphabet)
         elif y == 3:
             dico, init, final = algo.minimization(dico, init, final, alphabet)
             disp.display_table(dico, init, final, alphabet)
@@ -82,11 +84,10 @@ def main():
                     print("No: this word has not been recognized!")
                 print("Another word? (type 'end' to return to the menu)")
                 w = input("-> ")
-        elif y == 5:
+        elif y == 6:
             main()
         elif y == 0:
             print("Goodbye.\n")
             return
-
 
 main()
