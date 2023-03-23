@@ -48,9 +48,9 @@ def open_file(num):
     # creating the dictionnary of transitions
     dico = create_dict_array(states, alphabet)
     for i in range(len(lines) - 4):
-        transition = lines[i + 4].rstrip("\n")
+        transition = lines[i + 4].rstrip("\n").split(",")
         if dico[int(transition[0])][transition[1]] == [-1]:
             dico[int(transition[0])][transition[1]] = []
-        dico[int(transition[0])][transition[1]].append(int(transition[2:]))
+        dico[int(transition[0])][transition[1]].append(int(transition[2]))
 
     return dico, init, final, alphabet

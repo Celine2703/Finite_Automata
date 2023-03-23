@@ -43,7 +43,8 @@ def main():
         print("Goodbye.\n")
         return
     dico, init, final, alphabet = ini.open_file(x)
-    disp.display_table(dico, init, final, alphabet)
+    traduction = {}
+    disp.display_table(dico, init, final, alphabet, traduction = None)
     test_automaton(dico, init, final, alphabet)
     y = -1
     while y != 0:
@@ -53,9 +54,9 @@ def main():
             if info.is_standard(dico, init, final, alphabet) == -1:
                 print("This automaton is already standard.")
             else:
-                dico, init, final = algo.standardization(dico, init, final, alphabet)
+                traduction = algo.standardization(dico, init, final, alphabet, traduction)
                 print("Standardization done, the automaton is now:")
-                disp.display_table(dico, init, final, alphabet)
+                disp.display_table(dico, init, final, alphabet, traduction)
         elif y == 2:
             if info.is_deterministic(dico, init, final, alphabet) == -1:
                 if info.is_complete(dico, init, final, alphabet) == -1:
@@ -64,16 +65,17 @@ def main():
                     algo.completion(dico, init, final, alphabet)
                     print("Completion done, the automaton is now:")
             else:
-                algo.determinization(dico, init, final, alphabet)
+                traduction = algo.determinization(dico, init, final, alphabet, traduction)
+                print("traduction = ", traduction)
                 if info.is_complete(dico, init, final, alphabet) == -1:
                     print("Determinization done, the automaton is already complete, it is now:")
                 else:
                     dico, init, final = algo.completion(dico, init, final, alphabet)
                     print("Determinization and completion done, the automaton is now:")
-            disp.display_table(dico, init, final, alphabet)
+            disp.display_table(dico, init, final, alphabet, traduction)
         elif y == 3:
             dico, init, final = algo.minimization(dico, init, final, alphabet)
-            disp.display_table(dico, init, final, alphabet)
+            disp.display_table(dico, init, final, alphabet, traduction)
         elif y == 4:
             print("Input your word. (type 'end' to return to the menu)")
             w = input("-> ")
@@ -88,6 +90,6 @@ def main():
             main()
         elif y == 0:
             print("Goodbye.\n")
-            return
+            exit()
 
 main()

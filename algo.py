@@ -2,7 +2,8 @@ import information as info
 import display as disp
 import bisect
 
-def standardization(dico, init, final, alphabet):
+def standardization(dico, init, final, alphabet, traduction):
+    string = []
     #add a new state
     if (info.if_empty_word(dico, init, final, alphabet)):
         final.append(1)
@@ -16,6 +17,9 @@ def standardization(dico, init, final, alphabet):
     for state in range(len(dico) - 1):
         for lettre in alphabet:
             if (init[state] == 1):
+                if (state not in string):
+                    string.append(state)
+                    string = sorted(string)
                 if (dico[state][lettre] != [-1]):
                     if (dico[len(dico) - 1][lettre] == [-1]):
                         dico[len(dico) - 1][lettre] = []
@@ -26,7 +30,8 @@ def standardization(dico, init, final, alphabet):
                           
     for i in range(len(init) - 1):
         init[i] = 0
-    return dico, init, final
+    traduction[str(string)] = len(dico) - 1
+    return traduction
 
 def completion(dico, init, final, alphabet):
     #add a new state
@@ -52,14 +57,24 @@ def multiples_entry(dico, init, final, alphabet):
                 return True
     return False
 
-def determinization(dico, init, final, alphabet):
-    if (multiples_entry(dico, init, final, alphabet)):
-        dico, init, final = standardization(dico, init, final, alphabet)
+def init_determinization(dico, init, final, alphabet, traduction):
     traduction = {}
+    if (multiples_entry(dico, init, final, alphabet)):
+        #add a new state
+        if (info.if_empty_word(dico, init, final, alphabet)):
+            final.append(1)
+        else:
+            final.append(0)
+        init.append(1)
+        dico.append({})
+
+def determinization(dico, init, final, alphabet, traduction):
+    if (multiples_entry(dico, init, final, alphabet)):
+        traduction = standardization(dico, init, final, alphabet, traduction)
     for state in dico:
         for lettre in alphabet:
             if (len(state[lettre]) > 1):
-                print("state[lettre] = ", state[lettre], "traduction = ", traduction.get(str(state[lettre])))
+                #print("state[lettre] = ", state[lettre], "traduction = ", traduction.get(str(state[lettre])))
                 if (traduction.get(str(state[lettre])) == None): #if the state state[lettre] is not in the traduction dictionnary
                     dico.append({})
                     init.append(0)
@@ -68,16 +83,18 @@ def determinization(dico, init, final, alphabet):
                     else:
                         final.append(0)
                     traduction[str(state[lettre])] = len(dico) - 1 #create a new state state[lettre] in the traduction dictionnary and give it the name len(dico) - 1 = the index of the new state in dico
-                    print(state[lettre])
+                    #print(state[lettre])
                     for elem in alphabet:
                         find_new_states(dico, state[lettre], elem)
                 state[lettre] = [traduction[str(state[lettre])]]
+                print("traduction = ", traduction)
     return traduction
 
-def find_new_states(dico, statlettre, elem):
+def find_new_states(dico, transition, elem):
     dico[len(dico) - 1][elem] = []
-    for i in statlettre:
-        dico[len(dico) - 1][elem] += dico[i][elem]
+    for i in transition:
+        if(i not in dico[len(dico) - 1][elem]):
+            dico[len(dico) - 1][elem] += dico[i][elem]
     dico[len(dico) - 1][elem] = sorted(dico[len(dico) - 1][elem])
 
 def minimization(dico, init, final, alphabet):
