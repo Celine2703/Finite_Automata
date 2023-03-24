@@ -16,7 +16,7 @@ def create_array(n):
 
 def open_file(num):
     # opening and saving lines of the automata file
-    name_file = "Int2-6-" + str(num) + ".txt"
+    name_file = "Int2-6-" + num + ".txt"
     try:
         with open(name_file, 'r') as f:
             lines = f.readlines()

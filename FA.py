@@ -38,8 +38,8 @@ def test_automaton(dico, init, final, alphabet):
 def main():
     # the menu of our program
     print("\nWhich automaton do you want? (type 0 to quit)")
-    x = int(input("-> "))
-    if x == 0 :
+    x = input("-> ")
+    if x == '0' :
         print("Goodbye.\n")
         return
     dico, init, final, alphabet = ini.open_file(x)
@@ -49,15 +49,15 @@ def main():
     y = -1
     while y != 0:
         print_menu()
-        y = int(input("-> "))
-        if y == 1:
+        y = input("-> ")
+        if y == '1':
             if info.is_standard(dico, init, final, alphabet) == -1:
                 print("This automaton is already standard.")
             else:
                 traduction = algo.standardization(dico, init, final, alphabet, traduction)
                 print("Standardization done, the automaton is now:")
                 disp.display_table(dico, init, final, alphabet, traduction)
-        elif y == 2:
+        elif y == '2':
             if info.is_deterministic(dico, init, final, alphabet) == -1:
                 if info.is_complete(dico, init, final, alphabet) == -1:
                     print("This automaton is already deterministic and complete.")
@@ -73,10 +73,10 @@ def main():
                     dico, init, final = algo.completion(dico, init, final, alphabet)
                     print("Determinization and completion done, the automaton is now:")
             disp.display_table(dico, init, final, alphabet, traduction)
-        elif y == 3:
+        elif y == '3':
             dico, init, final = algo.minimization(dico, init, final, alphabet)
             disp.display_table(dico, init, final, alphabet, traduction)
-        elif y == 4:
+        elif y == '4':
             print("Input your word. (type 'end' to return to the menu)")
             w = input("-> ")
             while w != "end":
@@ -86,13 +86,12 @@ def main():
                     print("No: this word has not been recognized!")
                 print("Another word? (type 'end' to return to the menu)")
                 w = input("-> ")
-        elif y == 6:
+        elif y == '6':
             main()
-        elif y == 0:
+        elif y == '0':
             print("Goodbye.\n")
             exit()
+        else:
+            print("Wrong input, try again.")
 
 main()
-
-#  to do 
-# 29
