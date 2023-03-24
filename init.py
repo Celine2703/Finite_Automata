@@ -35,15 +35,17 @@ def open_file(num):
     init = create_array(states)
     init_list = lines[2].split(",")
     init_list[-1] = init_list[-1].rstrip("\n")
-    for i in range(len(init_list)):
-        init[int(init_list[i])] = 1
+    if (init_list != ['']):
+        for i in range(len(init_list)):
+            init[int(init_list[i])] = 1
 
     # creating a list showing if states are final
     final = create_array(states)
     final_list = lines[3].split(",")
     final_list[-1] = final_list[-1].rstrip("\n")
-    for i in range(len(final_list)):
-        final[int(final_list[i])] = 1
+    if (final_list != ['']):
+        for i in range(len(final_list)):
+            final[int(final_list[i])] = 1
 
     # creating the dictionnary of transitions
     dico = create_dict_array(states, alphabet)
@@ -52,5 +54,6 @@ def open_file(num):
         if dico[int(transition[0])][transition[1]] == [-1]:
             dico[int(transition[0])][transition[1]] = []
         dico[int(transition[0])][transition[1]].append(int(transition[2]))
+        dico[int(transition[0])][transition[1]].sort()
 
     return dico, init, final, alphabet

@@ -20,7 +20,7 @@ def display_ligne(dico, init, final, alphabet, i, traduction):
             tab.append('--')
         else:
             if traduction:
-                key = get_key(dico[i][alphabet[j]], traduction)
+                key = get_key(int(str(dico[i][alphabet[j]]).replace("[", "").replace("]", "")), traduction)
                 if key:
                     tab.append(key)
                 else:
@@ -30,6 +30,7 @@ def display_ligne(dico, init, final, alphabet, i, traduction):
     return (tab)
 
 def display_table(dico, init, final, alphabet, traduction = None):
+    print ("dico = ", dico)
     tab = []
     header = []
     header.append('')

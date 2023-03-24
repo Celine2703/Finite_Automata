@@ -30,7 +30,8 @@ def standardization(dico, init, final, alphabet, traduction):
                           
     for i in range(len(init) - 1):
         init[i] = 0
-    traduction[str(string)] = len(dico) - 1
+    if (len(string) > 1):
+        traduction[str(string)] = len(dico) - 1
     return traduction
 
 def completion(dico, init, final, alphabet):
@@ -71,32 +72,77 @@ def init_determinization(dico, init, final, alphabet, traduction):
 def determinization(dico, init, final, alphabet, traduction):
     if (multiples_entry(dico, init, final, alphabet)):
         traduction = standardization(dico, init, final, alphabet, traduction)
+    # print ("traduction = ", traduction)
     for state in dico:
         for lettre in alphabet:
-            if (len(state[lettre]) > 1):
-                #print("state[lettre] = ", state[lettre], "traduction = ", traduction.get(str(state[lettre])))
-                if (traduction.get(str(state[lettre])) == None): #if the state state[lettre] is not in the traduction dictionnary
+            composedstate = findtraduction(traduction, state[lettre])
+            print("composedstate = ", composedstate,"\n\n")
+            if (len(composedstate) > 1):
+                if (traduction.get(str(composedstate)) == None):
                     dico.append({})
                     init.append(0)
-                    if (info.is_final_state(final, state[lettre])):
+                    if (info.is_final_state(final,  composedstate)):
                         final.append(1)
                     else:
                         final.append(0)
-                    traduction[str(state[lettre])] = len(dico) - 1 #create a new state state[lettre] in the traduction dictionnary and give it the name len(dico) - 1 = the index of the new state in dico
-                    #print(state[lettre])
+                    traduction[str(composedstate)] = len(dico) - 1
                     for elem in alphabet:
-                        find_new_states(dico, state[lettre], elem)
-                state[lettre] = [traduction[str(state[lettre])]]
-                print("traduction = ", traduction)
+                        find_new_states(dico, composedstate, elem)
+                # print ("state[lettre] = ", state[lettre], "traduction = ", traduction.get(str(state[lettre])))
+                state[lettre] = [traduction[str(composedstate)]]
+    # for state in dico:
+    #     for lettre in alphabet:
+    #         if (len(state[lettre]) > 1):
+    #             #print("state[lettre] = ", state[lettre], "traduction = ", traduction.get(str(state[lettre])))
+    #             if (traduction.get(str(state[lettre])) == None): #if the state state[lettre] is not in the traduction dictionnary
+    #                 dico.append({})
+    #                 init.append(0)
+    #                 if (info.is_final_state(final, state[lettre])):
+    #                     final.append(1)
+    #                 else:
+    #                     final.append(0)
+    #                 traduction[str(state[lettre])] = len(dico) - 1 #create a new state state[lettre] in the traduction dictionnary and give it the name len(dico) - 1 = the index of the new state in dico
+    #                 #print(state[lettre])
+    #                 for elem in alphabet:
+    #                     find_new_states(dico, state[lettre], elem)
+    #             state[lettre] = [traduction[str(state[lettre])]]
+    #             print("traduction = ", traduction)
+    # print ("dict = ", dico)
     return traduction
+
+def findtraduction(traduction ,transition):
+    out = []
+    ok = 1
+    
+    print ("transition = ", transition)
+    for i in transition:
+        if (disp.get_key(i, traduction) != False):
+            ok = 0
+            # print("CELINE disp.get_key(i, traduction) = ", disp.get_key(i, traduction))
+            tmp = disp.get_key(i, traduction)
+            s = tmp.strip('[]')  # supprimer les crochets du début et de la fin de la chaîne
+            lst = [int(x) for x in s.split(',')]
+            out = out + lst
+            # print (" =",tmp)
+        else:
+           out.append(i)
+    out = list(set(out))
+    out.sort()
+    return out
+
 
 def find_new_states(dico, transition, elem):
     dico[len(dico) - 1][elem] = []
     for i in transition:
-        if(i not in dico[len(dico) - 1][elem]):
-            dico[len(dico) - 1][elem] += dico[i][elem]
+        for state in dico[i][elem]:
+            if (state not in dico[len(dico) - 1][elem] and state != -1):
+                dico[len(dico) - 1][elem].append(state)
+        # if(i not in dico[len(dico) - 1][elem] and dico[i][elem] != [-1]):
+        #     dico[len(dico) - 1][elem] += dico[i][elem]
     dico[len(dico) - 1][elem] = sorted(dico[len(dico) - 1][elem])
-
+    if (dico[len(dico) - 1][elem] == []):
+        dico[len(dico) - 1][elem] = [-1]
+    
 def minimization(dico, init, final, alphabet):
     print("minimization")
 

@@ -44,8 +44,8 @@ def is_deterministic(dico, init, final, alphabet):
     return -1
 
 def is_complete(dico, init, final, alphabet):
-    for state in dico:
+    for i in range(len(dico)):
         for lettre in alphabet:
-            if state[lettre] == [-1]:
-                return 0
+            if dico[i][lettre] == [-1]:
+                return i
     return -1
