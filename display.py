@@ -10,7 +10,7 @@ def display_ligne(dico, init, final, alphabet, i, traduction):
     if traduction:
         key = get_key(i, traduction)
         if key:
-            tab.append(key.replace("[", "").replace("]", ""))
+            tab.append(key.replace("[", "").replace("]", "").replace(", ", "·"))
         else:
             tab.append(i)
     else:
@@ -22,7 +22,7 @@ def display_ligne(dico, init, final, alphabet, i, traduction):
             if traduction:
                 key = get_key(int(str(dico[i][alphabet[j]]).replace("[", "").replace("]", "")), traduction)
                 if key:
-                    tab.append(key)
+                    tab.append(key.replace(", ", "·"))
                 else:
                     tab.append(dico[i][alphabet[j]])
             else:
