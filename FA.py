@@ -71,9 +71,9 @@ def main():
                 if info.is_complete(dico, init, final, alphabet) == -1:
                     print("Determinization done, the automaton is already complete, it is now:")
                 else:
-                    # dico, init, final = algo.completion(dico, init, final, alphabet)
+                    dico, init, final = algo.completion(dico, init, final, alphabet)
                     print("Determinization and completion done, the automaton is now:")
-            disp.display_table(dico, init, final, alphabet, traduction,trueindex)
+            disp.display_table(dico, init, final, alphabet, traduction, trueindex)
         elif y == '3':
             dico, init, final = algo.minimization(dico, init, final, alphabet)
             disp.display_table(dico, init, final, alphabet, traduction)

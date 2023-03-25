@@ -130,7 +130,7 @@ def determinization2(dico, init, final, alphabet, traduction):
                     trueindex[str(state[lettre])] = len(new_dico)
                     new_dico.append({'a': [-1], 'b': [-1]})
                     new_init.append(0)
-                    if (info.is_final_state(final, list_new_state3) == True):
+                    if (info.is_final_state(final, list_new_state) == True):
                         new_final.append(1)
                     else:
                         new_final.append(0)
@@ -152,7 +152,6 @@ def determinization2(dico, init, final, alphabet, traduction):
     for letter in alphabet:
         if (letter != '€'):
             new_alphabet.append(letter)
-    print("new_dico = ", new_dico)
     build_automaton(new_dico, new_init, new_final, new_alphabet, traduction, trueindex)
     return new_dico, new_init, new_final, new_alphabet, traduction, trueindex
 
@@ -170,11 +169,9 @@ def list_transi (list_states, letter, dico):
 def determinization(dico, init, final, alphabet, traduction):
     if (multiples_entry(dico, init, final, alphabet)):
         traduction = standardization(dico, init, final, alphabet, traduction)
-    # print ("traduction = ", traduction)
     for state in dico:
         for lettre in alphabet:
             composedstate = findtraduction(traduction, state[lettre])
-            print("composedstate = ", composedstate,"\n\n")
             if (len(composedstate) > 1):
                 if (traduction.get(str(composedstate)) == None):
                     dico.append({})
@@ -186,39 +183,18 @@ def determinization(dico, init, final, alphabet, traduction):
                     traduction[str(composedstate)] = len(dico) - 1
                     for elem in alphabet:
                         find_new_states(dico, composedstate, elem)
-                # print ("state[lettre] = ", state[lettre], "traduction = ", traduction.get(str(state[lettre])))
                 state[lettre] = [traduction[str(composedstate)]]
-    # for state in dico:
-    #     for lettre in alphabet:
-    #         if (len(state[lettre]) > 1):
-    #             #print("state[lettre] = ", state[lettre], "traduction = ", traduction.get(str(state[lettre])))
-    #             if (traduction.get(str(state[lettre])) == None): #if the state state[lettre] is not in the traduction dictionnary
-    #                 dico.append({})
-    #                 init.append(0)
-    #                 if (info.is_final_state(final, state[lettre])):
-    #                     final.append(1)
-    #                 else:
-    #                     final.append(0)
-    #                 traduction[str(state[lettre])] = len(dico) - 1 #create a new state state[lettre] in the traduction dictionnary and give it the name len(dico) - 1 = the index of the new state in dico
-    #                 #print(state[lettre])
-    #                 for elem in alphabet:
-    #                     find_new_states(dico, state[lettre], elem)
-    #             state[lettre] = [traduction[str(state[lettre])]]
-    #             print("traduction = ", traduction)
-    # print ("dict = ", dico)
+
     return traduction
 
 def findtraduction(traduction ,transition):
     out = []
-    
-    print ("transition = ", transition)
     for i in transition:
         if (disp.get_key(i, traduction) != False):
             tmp = disp.get_key(i, traduction)
             s = tmp.strip('[]')  # supprimer les crochets du début et de la fin de la chaîne
             lst = [int(x) for x in s.split(',')]
             out = out + lst
-            # print (" =",tmp)
         else:
            out.append(i)
     out = list(set(out))

@@ -16,20 +16,23 @@ def display_ligne(dico, init, final, alphabet, i, traduction, trueindex):
                 tab.append(i)
         else:
             key = get_key(i, trueindex)
+            print ("key for  ", i, " is " , key)
             if key:
-                tab.append(key)
+                tab.append(key.replace("[", "").replace("]", "").replace(", ", "·"))
             else :
                 index = i
                 tab.append(index)
-                print ("index = ", index)
     else:
         tab.append(i)
     for j in range(len(alphabet)):
         if (dico[i][alphabet[j]] == [-1]):
             tab.append('--')
         else:
-            if traduction:
-                key = get_key((str(dico[i][alphabet[j]]).replace("[", "").replace("]", "")), traduction)
+            if traduction:       
+                key = get_key(int(str(dico[i][alphabet[j]]).replace("[", "").replace("]", "")), trueindex)
+                # key = get_key((str(dico[i][alphabet[j]]).replace("[", "").replace("]", "")), traduction)
+                # key = traduction.get(str(dico[i][alphabet[j]]).replace("[", "").replace("]", ""))
+                # print ("key for  ", str(dico[i][alphabet[j]]), " is " , key)
                 if key:
                     tab.append(key.replace(", ", "·"))
                 else:
@@ -43,7 +46,9 @@ def display_table(dico, init, final, alphabet, traduction = None, trueindex = No
     header = []
     header.append('')
     header.append('State')
-    print ("\ndico end = ", dico)
+    print("dico to print : ", dico)
+    print("\n\n traduction : ", traduction)
+    print("\n\n trueindex : ", trueindex)
     for i in range(len(alphabet)):
         header.append(alphabet[i])
     for i in range(len(dico)):
