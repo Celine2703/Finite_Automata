@@ -5,6 +5,8 @@ def if_empty_word(dico, init, final, alphabet):
     return False
 
 def is_final_state(final, state):
+    print ("state = ", state)
+    print ("final = ", final)
     for i in state:
         if final[i] == 1:
             return True

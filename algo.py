@@ -130,7 +130,10 @@ def determinization2(dico, init, final, alphabet, traduction):
                     trueindex[str(state[lettre])] = len(new_dico)
                     new_dico.append({'a': [-1], 'b': [-1]})
                     new_init.append(0)
-                    new_final.append(0)
+                    if (info.is_final_state(final, list_new_state3) == True):
+                        new_final.append(1)
+                    else:
+                        new_final.append(0)
                 for newletter in alphabet:
                     if (newletter == '€'):
                         continue
