@@ -27,6 +27,8 @@ def open_file(num):
     # creating a list of the characters of the alphabet
     alphabet = lines[0].split(",")
     alphabet[-1] = alphabet[-1].rstrip("\n")
+    if (alphabet == ['']):
+        alphabet = []
 
     # the number of states
     states = int(lines[1].rstrip("\n"))

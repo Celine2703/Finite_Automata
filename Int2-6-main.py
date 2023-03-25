@@ -1,7 +1,25 @@
-import Int2-6-information as info
-import Int2-6-display as disp
-import Int2-6-algo as algo
-import Int2-6-init as ini
+import importlib.util
+
+# Import Int2-6-information
+info_spec = importlib.util.spec_from_file_location("Int2-6-information", "./Int2-6-information.py")
+info = importlib.util.module_from_spec(info_spec)
+info_spec.loader.exec_module(info)
+
+# Import Int2-6-display
+disp_spec = importlib.util.spec_from_file_location("Int2-6-display", "./Int2-6-display.py")
+disp = importlib.util.module_from_spec(disp_spec)
+disp_spec.loader.exec_module(disp)
+
+# Import Int2-6-algo
+algo_spec = importlib.util.spec_from_file_location("Int2-6-algo", "./Int2-6-algo.py")
+algo = importlib.util.module_from_spec(algo_spec)
+algo_spec.loader.exec_module(algo)
+
+# Import Int2-6-init
+ini_spec = importlib.util.spec_from_file_location("Int2-6-init", "./Int2-6-init.py")
+ini = importlib.util.module_from_spec(ini_spec)
+ini_spec.loader.exec_module(ini)
+
 
 def print_menu():
     print("\nWhat do you want to do?\n")
@@ -67,7 +85,6 @@ def main():
                     print("Completion done, the automaton is now:")
             else:
                 dico, init,final, alphabet,traduction,trueindex = algo.determinization2(dico, init, final, alphabet, traduction)
-                print("traduction = ", traduction)
                 if info.is_complete(dico, init, final, alphabet) == -1:
                     print("Determinization done, the automaton is already complete, it is now:")
                 else:
@@ -87,6 +104,9 @@ def main():
                     print("No: this word has not been recognized!")
                 print("Another word? (type 'end' to return to the menu)")
                 w = input("-> ")
+        elif y == '5':
+            algo.complementary_automaton(dico, init, final, alphabet)
+            disp.display_table(dico, init, final, alphabet, traduction)
         elif y == '6':
             main()
         elif y == '0':
