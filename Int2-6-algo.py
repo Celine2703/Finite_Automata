@@ -1,5 +1,13 @@
-import Int2-6-information as info
-import Int2-6-display as disp
+import importlib.util
+# Import Int2-6-information
+info_spec = importlib.util.spec_from_file_location("Int2-6-information", "./Int2-6-information.py")
+info = importlib.util.module_from_spec(info_spec)
+info_spec.loader.exec_module(info)
+
+# Import Int2-6-display
+disp_spec = importlib.util.spec_from_file_location("Int2-6-display", "./Int2-6-display.py")
+disp = importlib.util.module_from_spec(disp_spec)
+disp_spec.loader.exec_module(disp)
 # import bisect
 
 def standardization(dico, init, final, alphabet, traduction):
@@ -49,15 +57,6 @@ def completion(dico, init, final, alphabet):
                 dico[state][lettre] = [len(dico) - 1]
     return dico, init, final
 
-def multiples_entry(dico, init, final, alphabet):
-    j=0
-    for i in range(len(dico)):
-        if (init[i] == 1):
-            j+=1
-            if (j>1):
-                return True
-    return False
-
 def init_determinization(dico, init, final, alphabet, traduction):
     traduction = {}
     new_dico = []
@@ -75,10 +74,14 @@ def init_determinization(dico, init, final, alphabet, traduction):
     list_init = list_init_states(init)
     if (alphabet[0] == '€'):
         list_init = add_empty_list(dico, list_init)
+        traduction[str(list_init)] = 0
+        trueindex[0] = 0
+
     else :
         list_init.sort()
-    traduction[str(list_init)] = 0
-    trueindex['[1·3]'] = 0
+        traduction[str(list_init)] = list_init
+        trueindex[str(list_init)] = 0        
+    
     for state in list_init:
         for lettre in alphabet:
             if (lettre == '€'):
@@ -131,7 +134,9 @@ def determinization2(dico, init, final, alphabet, traduction):
                     trueindex[str(state[lettre])] = len(new_dico)
                     new_dico.append({'a': [-1], 'b': [-1]})
                     new_init.append(0)
-                    if (info.is_final_state(final, list_new_state) == True):
+                    if (alphabet[0] == '€' and info.is_final_state(final, list_new_state) == True):
+                        new_final.append(1)
+                    elif (alphabet[0] != '€' and info.is_final_state(final, state[lettre]) == True):
                         new_final.append(1)
                     else:
                         new_final.append(0)
@@ -145,6 +150,7 @@ def determinization2(dico, init, final, alphabet, traduction):
                     if (list_transi(list_new_state, newletter, dico) != [-1] and list_transi(list_new_state, newletter, dico) not in new_dico[(trueindex[str(state[lettre])])][newletter]):
                         new_dico[(trueindex[str(state[lettre])])][newletter] += list_transi(list_new_state, newletter, dico)
                         state[lettre] = list (set(state[lettre]))
+                        state[lettre].sort()
                         new_dico[(trueindex[str(state[lettre])])][newletter] = list(set(new_dico[(trueindex[str(state[lettre])])][newletter]))
                        
                     if (new_dico[(trueindex[str(state[lettre])])][newletter] == []):
@@ -166,27 +172,6 @@ def list_transi (list_states, letter, dico):
     if ret == []:
         ret.append(-1)
     return ret
-
-def determinization(dico, init, final, alphabet, traduction):
-    if (multiples_entry(dico, init, final, alphabet)):
-        traduction = standardization(dico, init, final, alphabet, traduction)
-    for state in dico:
-        for lettre in alphabet:
-            composedstate = findtraduction(traduction, state[lettre])
-            if (len(composedstate) > 1):
-                if (traduction.get(str(composedstate)) == None):
-                    dico.append({})
-                    init.append(0)
-                    if (info.is_final_state(final,  composedstate)):
-                        final.append(1)
-                    else:
-                        final.append(0)
-                    traduction[str(composedstate)] = len(dico) - 1
-                    for elem in alphabet:
-                        find_new_states(dico, composedstate, elem)
-                state[lettre] = [traduction[str(composedstate)]]
-
-    return traduction
 
 def findtraduction(traduction ,transition):
     out = []

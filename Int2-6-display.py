@@ -30,9 +30,6 @@ def display_ligne(dico, init, final, alphabet, i, traduction, trueindex):
         else:
             if traduction:       
                 key = get_key(int(str(dico[i][alphabet[j]]).replace("[", "").replace("]", "")), trueindex)
-                # key = get_key((str(dico[i][alphabet[j]]).replace("[", "").replace("]", "")), traduction)
-                # key = traduction.get(str(dico[i][alphabet[j]]).replace("[", "").replace("]", ""))
-                # print ("key for  ", str(dico[i][alphabet[j]]), " is " , key)
                 if key:
                     tab.append(key.replace(", ", "·"))
                 else:
@@ -46,9 +43,6 @@ def display_table(dico, init, final, alphabet, traduction = None, trueindex = No
     header = []
     header.append('')
     header.append('State')
-    print("dico to print : ", dico)
-    print("\n\n traduction : ", traduction)
-    print("\n\n trueindex : ", trueindex)
     for i in range(len(alphabet)):
         header.append(alphabet[i])
     for i in range(len(dico)):
