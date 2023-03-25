@@ -77,7 +77,6 @@ def init_determinization(dico, init, final, alphabet, traduction):
     else :
         list_init.sort()
     traduction[str(list_init)] = 0
-    print ("list_init = ", list_init)
     for state in list_init:
         for lettre in alphabet:
             if (lettre == '€'):
@@ -89,20 +88,7 @@ def init_determinization(dico, init, final, alphabet, traduction):
                     if (transition not in new_dico[0][lettre] and transition != -1):
                         new_dico[0][lettre].append(transition)
                         new_dico[0][lettre].sort()
-    print("new_dico = ", new_dico)
     return traduction, new_dico, new_init, new_final
-
-        # for i in list_init:
-        #     for lettre in alphabet:
-
-                # if (dico[i][lettre] != [-1]):
-                #     if (new_dico[0].get(lettre) == None):
-                #         new_dico[0][lettre] = []
-                #     for transition in dico[i][lettre]:
-                #         if (transition not in new_dico[0][lettre]):
-                #             new_dico[0][lettre].append(transition)
-                #             new_dico[0][lettre] = sorted(new_dico[0][lettre])
-        # add the transitions to the new state
 
 def list_init_states(init):
     list_init = []
@@ -124,8 +110,6 @@ def add_empty_list(dico, list_prime):
     if (added == 1):
         return (add_empty_list(dico, list_prime))
     return list_prime
-
-    
 
 def determinization2(dico, init, final, alphabet, traduction):
     traduction, new_dico, new_init, new_final = init_determinization(dico, init, final, alphabet, traduction)
@@ -166,6 +150,7 @@ def determinization2(dico, init, final, alphabet, traduction):
         if (letter != '€'):
             new_alphabet.append(letter)
     print("new_dico = ", new_dico)
+    build_automaton(new_dico, new_init, new_final, new_alphabet, traduction, trueindex)
     return new_dico, new_init, new_final, new_alphabet, traduction, trueindex
 
 def list_transi (list_states, letter, dico):
@@ -277,3 +262,12 @@ def recognize_word(dico, init, final, alphabet, word):
                 return True
     else:
         return False
+
+def build_automaton(dico, init, final, alphabet, traduction, trueindex):
+    for state in dico:
+        # replace the state that is a list by the index of the state in the dico
+        for lettre in alphabet:
+            if str(state[lettre]) in traduction:
+                state[lettre] = [traduction[str(state[lettre])]]
+            if (str(state[lettre]) in trueindex):
+                state[lettre] = [trueindex[str(state[lettre])]]

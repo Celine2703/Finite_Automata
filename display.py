@@ -15,10 +15,8 @@ def display_ligne(dico, init, final, alphabet, i, traduction, trueindex):
             else:
                 tab.append(i)
         else:
-            # print ("i = ", i, "trueindex = ", trueindex)
             key = get_key(i, trueindex)
             if key:
-                # print("key", key)
                 tab.append(key)
             else :
                 index = i
