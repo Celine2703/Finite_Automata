@@ -214,9 +214,50 @@ def find_new_states(dico, transition, elem):
     dico[len(dico) - 1][elem] = sorted(dico[len(dico) - 1][elem])
     if (dico[len(dico) - 1][elem] == []):
         dico[len(dico) - 1][elem] = [-1]
-    
+
 def minimization(dico, init, final, alphabet):
+    groups = []
+    for isfinal in final:
+        if isfinal == 0:
+            groups.append(1)
+        else:
+            groups.append(-1)
+    print(groups)
+    pattern = []
+    for i in range(len(dico)):
+        pattern.append([])
+        for lettre in alphabet:
+            print(dico)
+            if dico[i].get(lettre) != -1:
+                for j in range (len(dico[i].get(lettre))):
+                    if final[dico[i].get(lettre)[j]] == 0:
+                        pattern[i].append(0)
+                    elif final[dico[i].get(lettre)[j]] == 1:
+                        pattern[i].append(1)
+    print(pattern)
+    for i in range(len(groups)):
+        if groups[i] == -1:
+            groups[i] -= i
+        else:
+            groups[i] += i
+    print(groups)
+    for j in range(len(groups)):
+        if groups[j] < 0:
+            default_pattern = pattern[j]
+            for i in range(len(pattern)):
+                if pattern[i] == default_pattern:
+                    if groups[i] < 0:
+                        groups[i] = groups[j]
+        if groups[j] > 0:
+            default_pattern = pattern[j]
+            for i in range(len(pattern)):
+                if pattern[i] == default_pattern:
+                    if groups[i] > 0:
+                        groups[i] = groups[j]
+    print(groups)
     print("minimization")
+    return dico, init, final
+
 
 def complementarisaton(dico, init, final, alphabet):
     for state in range(len(final)):
