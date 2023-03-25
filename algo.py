@@ -64,6 +64,7 @@ def init_determinization(dico, init, final, alphabet, traduction):
     new_init = []
     new_final = []
     traduction = {}
+    trueindex = {}
         #add a new state
     if (info.if_empty_word(dico, init, final, alphabet)):
         new_final.append(1)
@@ -77,6 +78,7 @@ def init_determinization(dico, init, final, alphabet, traduction):
     else :
         list_init.sort()
     traduction[str(list_init)] = 0
+    trueindex['[1·3]'] = 0
     for state in list_init:
         for lettre in alphabet:
             if (lettre == '€'):
@@ -88,7 +90,7 @@ def init_determinization(dico, init, final, alphabet, traduction):
                     if (transition not in new_dico[0][lettre] and transition != -1):
                         new_dico[0][lettre].append(transition)
                         new_dico[0][lettre].sort()
-    return traduction, new_dico, new_init, new_final
+    return traduction, new_dico, new_init, new_final, trueindex
 
 def list_init_states(init):
     list_init = []
@@ -112,8 +114,7 @@ def add_empty_list(dico, list_prime):
     return list_prime
 
 def determinization2(dico, init, final, alphabet, traduction):
-    traduction, new_dico, new_init, new_final = init_determinization(dico, init, final, alphabet, traduction)
-    trueindex = {}
+    traduction, new_dico, new_init, new_final , trueindex= init_determinization(dico, init, final, alphabet, traduction)
     for state in new_dico:
         for lettre in alphabet :
             if (lettre == '€'):
