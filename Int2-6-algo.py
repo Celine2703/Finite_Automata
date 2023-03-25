@@ -217,13 +217,13 @@ def minimization(dico, init, final, alphabet):
     pattern = []
     for i in range(len(dico)):
         pattern.append([])
-        for lettre in alphabet:
+        for char in alphabet:
             print(dico)
-            if dico[i].get(lettre) != -1:
-                for j in range (len(dico[i].get(lettre))):
-                    if final[dico[i].get(lettre)[j]] == 0:
+            if dico[i].get(char) != -1:
+                for j in range (len(dico[i].get(char))):
+                    if final[dico[i].get(char)[j]] == 0:
                         pattern[i].append(0)
-                    elif final[dico[i].get(lettre)[j]] == 1:
+                    elif final[dico[i].get(char)[j]] == 1:
                         pattern[i].append(1)
     print(pattern)
     for i in range(len(groups)):
@@ -245,6 +245,96 @@ def minimization(dico, init, final, alphabet):
                 if pattern[i] == default_pattern:
                     if groups[i] > 0:
                         groups[i] = groups[j]
+    print(groups)
+    for j in range(len(groups)):
+        list_of_related_states = []
+        if groups[j] > 0:
+            our_group = groups[j]
+            for i in range(len(groups)):
+                if groups[i] == our_group:
+                    list_of_related_states.append(i)
+            done = 0
+            for char in alphabet:
+                if done == 0:
+                    if dico[j].get(char)[0] not in list_of_related_states:
+                        groups[j] += j
+                        print(dico[j].get(char))
+                        for x in list_of_related_states:
+                            if dico[j].get(char)[0] == dico[x].get(char)[0]:
+                                groups[x] = groups[j]
+                        for char2 in alphabet:
+                            if dico[j].get(char2)[0] not in list_of_related_states:
+                                if char2 != char:
+                                    for x in list_of_related_states:
+                                        if dico[j].get(char2)[0] != dico[x].get(char2)[0]:
+                                            groups[x] += j
+                        done = 1
+        if groups[j] < 0:
+            our_group = groups[j]
+            for i in range(len(groups)):
+                if groups[i] == our_group:
+                    list_of_related_states.append(i)
+            done = 0
+            for char in alphabet:
+                if done == 0:
+                    if dico[j].get(char)[0] not in list_of_related_states:
+                        groups[j] -= j
+                        print(dico[j].get(char))
+                        for x in list_of_related_states:
+                            if dico[j].get(char)[0] == dico[x].get(char)[0]:
+                                groups[x] = groups[j]
+                        for char2 in alphabet:
+                            if dico[j].get(char2)[0] not in list_of_related_states:
+                                if char2 != char:
+                                    for x in list_of_related_states:
+                                        if dico[j].get(char2)[0] != dico[x].get(char2)[0]:
+                                            groups[x] -= j
+                        done = 1
+    print(groups)
+    for j in range(len(groups)):
+        list_of_related_states = []
+        if groups[j] > 0:
+            our_group = groups[j]
+            for i in range(len(groups)):
+                if groups[i] == our_group:
+                    list_of_related_states.append(i)
+            done = 0
+            for char in alphabet:
+                if done == 0:
+                    if dico[j].get(char)[0] not in list_of_related_states:
+                        groups[j] += j
+                        print(dico[j].get(char))
+                        for x in list_of_related_states:
+                            if dico[j].get(char)[0] == dico[x].get(char)[0]:
+                                groups[x] = groups[j]
+                        for char2 in alphabet:
+                            if dico[j].get(char2)[0] not in list_of_related_states:
+                                if char2 != char:
+                                    for x in list_of_related_states:
+                                        if dico[j].get(char2)[0] != dico[x].get(char2)[0]:
+                                            groups[x] += j
+                        done = 1
+        if groups[j] < 0:
+            our_group = groups[j]
+            for i in range(len(groups)):
+                if groups[i] == our_group:
+                    list_of_related_states.append(i)
+            done = 0
+            for char in alphabet:
+                if done == 0:
+                    if dico[j].get(char)[0] not in list_of_related_states:
+                        groups[j] -= j
+                        print(dico[j].get(char))
+                        for x in list_of_related_states:
+                            if dico[j].get(char)[0] == dico[x].get(char)[0]:
+                                groups[x] = groups[j]
+                        for char2 in alphabet:
+                            if dico[j].get(char2)[0] not in list_of_related_states:
+                                if char2 != char:
+                                    for x in list_of_related_states:
+                                        if dico[j].get(char2)[0] != dico[x].get(char2)[0]:
+                                            groups[x] -= j
+                        done = 1
     print(groups)
     print("minimization")
     return dico, init, final
