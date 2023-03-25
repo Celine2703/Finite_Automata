@@ -1,3 +1,4 @@
+import copy
 import importlib.util
 # Import Int2-6-information
 info_spec = importlib.util.spec_from_file_location("Int2-6-information", "./Int2-6-information.py")
@@ -208,30 +209,28 @@ def find_new_states(dico, transition, elem):
 
 def minimization(dico, init, final, alphabet):
     groups = []
+    # separating final and initial states
     for isfinal in final:
         if isfinal == 0:
             groups.append(1)
         else:
             groups.append(-1)
-    print(groups)
+    # first step: separating on the pattern of states of arrivals (NT / T)
     pattern = []
     for i in range(len(dico)):
         pattern.append([])
         for char in alphabet:
-            print(dico)
             if dico[i].get(char) != -1:
                 for j in range (len(dico[i].get(char))):
                     if final[dico[i].get(char)[j]] == 0:
                         pattern[i].append(0)
                     elif final[dico[i].get(char)[j]] == 1:
                         pattern[i].append(1)
-    print(pattern)
     for i in range(len(groups)):
         if groups[i] == -1:
             groups[i] -= i
         else:
             groups[i] += i
-    print(groups)
     for j in range(len(groups)):
         if groups[j] < 0:
             default_pattern = pattern[j]
@@ -245,98 +244,97 @@ def minimization(dico, init, final, alphabet):
                 if pattern[i] == default_pattern:
                     if groups[i] > 0:
                         groups[i] = groups[j]
+    # 2nd step: separating depending on 1) if states of arrival belongs to the group of the state we are on
+    #           2) if not, recognizing other states doing the same that goes in the same group
+    print("Separation 1:")
     print(groups)
-    for j in range(len(groups)):
-        list_of_related_states = []
-        if groups[j] > 0:
-            our_group = groups[j]
-            for i in range(len(groups)):
-                if groups[i] == our_group:
-                    list_of_related_states.append(i)
-            done = 0
-            for char in alphabet:
-                if done == 0:
-                    if dico[j].get(char)[0] not in list_of_related_states:
-                        groups[j] += j
-                        print(dico[j].get(char))
-                        for x in list_of_related_states:
-                            if dico[j].get(char)[0] == dico[x].get(char)[0]:
-                                groups[x] = groups[j]
-                        for char2 in alphabet:
-                            if dico[j].get(char2)[0] not in list_of_related_states:
-                                if char2 != char:
-                                    for x in list_of_related_states:
-                                        if dico[j].get(char2)[0] != dico[x].get(char2)[0]:
-                                            groups[x] += j
-                        done = 1
-        if groups[j] < 0:
-            our_group = groups[j]
-            for i in range(len(groups)):
-                if groups[i] == our_group:
-                    list_of_related_states.append(i)
-            done = 0
-            for char in alphabet:
-                if done == 0:
-                    if dico[j].get(char)[0] not in list_of_related_states:
-                        groups[j] -= j
-                        print(dico[j].get(char))
-                        for x in list_of_related_states:
-                            if dico[j].get(char)[0] == dico[x].get(char)[0]:
-                                groups[x] = groups[j]
-                        for char2 in alphabet:
-                            if dico[j].get(char2)[0] not in list_of_related_states:
-                                if char2 != char:
-                                    for x in list_of_related_states:
-                                        if dico[j].get(char2)[0] != dico[x].get(char2)[0]:
-                                            groups[x] -= j
-                        done = 1
+    for i in range(-len(groups), len(groups)+1):
+        partition = []
+        list_index = []
+        for index in range(len(groups)):
+            if groups[index] == i:
+                list_index.append(index)
+        for j in list_index:
+            partition.append(dico[j])
+        if i in groups:
+            disp.display_table(partition, init, final, alphabet)
+            print("\n")
+    old_groups =[0]*len(groups)
+    # processing until there is no more changes
+    while old_groups != groups:
+        count_pos, count_neg = 0,0
+        for i in range (len(groups)):
+            if old_groups[i] != groups[i]:
+                if groups[i] > 0:
+                    count_pos += 1
+                else:
+                    count_neg -= 1
+        old_groups = copy.deepcopy(groups)
+        for j in range(len(groups)):
+            list_of_related_states = []
+            # initial states part
+            if groups[j] > 0:
+                our_group = groups[j]
+                for i in range(len(groups)):
+                    if groups[i] == our_group:
+                        list_of_related_states.append(i)
+                done = 0
+                for char in alphabet:
+                    if done == 0:
+                        if dico[j].get(char)[0] not in list_of_related_states:
+                            free_number = 1
+                            while free_number in groups:
+                                free_number += 1
+                            if free_number <= count_pos:
+                                groups[j] = free_number
+                            for x in list_of_related_states:
+                                if dico[j].get(char)[0] == dico[x].get(char)[0]:
+                                    groups[x] = groups[j]
+                            for char2 in alphabet:
+                                if dico[j].get(char2)[0] not in list_of_related_states:
+                                    if char2 != char:
+                                        for x in list_of_related_states:
+                                            if dico[j].get(char2)[0] != dico[x].get(char2)[0]:
+                                                free_number = 1
+                                                while free_number in groups:
+                                                    free_number += 1
+                                                if free_number <= count_pos:
+                                                    groups[x] = free_number
+                            done = 1
+            # final states part
+            if groups[j] < 0:
+                our_group = groups[j]
+                for i in range(len(groups)):
+                    if groups[i] == our_group:
+                        list_of_related_states.append(i)
+                done = 0
+                for char in alphabet:
+                    if done == 0:
+                        if dico[j].get(char)[0] not in list_of_related_states:
+                            free_number = -1
+                            while free_number in groups:
+                                free_number -= 1
+                            if free_number >= count_neg:
+                                groups[j] = free_number
+                            for x in list_of_related_states:
+                                if dico[j].get(char)[0] == dico[x].get(char)[0]:
+                                    groups[x] = groups[j]
+                            for char2 in alphabet:
+                                if dico[j].get(char2)[0] not in list_of_related_states:
+                                    if char2 != char:
+                                        for x in list_of_related_states:
+                                            if dico[j].get(char2)[0] != dico[x].get(char2)[0]:
+                                                free_number = -1
+                                                while free_number in groups:
+                                                    free_number -= 1
+                                                if free_number >= count_neg:
+                                                    groups[x] = free_number
+                            done = 1
+        print(groups)
+
     print(groups)
-    for j in range(len(groups)):
-        list_of_related_states = []
-        if groups[j] > 0:
-            our_group = groups[j]
-            for i in range(len(groups)):
-                if groups[i] == our_group:
-                    list_of_related_states.append(i)
-            done = 0
-            for char in alphabet:
-                if done == 0:
-                    if dico[j].get(char)[0] not in list_of_related_states:
-                        groups[j] += j
-                        print(dico[j].get(char))
-                        for x in list_of_related_states:
-                            if dico[j].get(char)[0] == dico[x].get(char)[0]:
-                                groups[x] = groups[j]
-                        for char2 in alphabet:
-                            if dico[j].get(char2)[0] not in list_of_related_states:
-                                if char2 != char:
-                                    for x in list_of_related_states:
-                                        if dico[j].get(char2)[0] != dico[x].get(char2)[0]:
-                                            groups[x] += j
-                        done = 1
-        if groups[j] < 0:
-            our_group = groups[j]
-            for i in range(len(groups)):
-                if groups[i] == our_group:
-                    list_of_related_states.append(i)
-            done = 0
-            for char in alphabet:
-                if done == 0:
-                    if dico[j].get(char)[0] not in list_of_related_states:
-                        groups[j] -= j
-                        print(dico[j].get(char))
-                        for x in list_of_related_states:
-                            if dico[j].get(char)[0] == dico[x].get(char)[0]:
-                                groups[x] = groups[j]
-                        for char2 in alphabet:
-                            if dico[j].get(char2)[0] not in list_of_related_states:
-                                if char2 != char:
-                                    for x in list_of_related_states:
-                                        if dico[j].get(char2)[0] != dico[x].get(char2)[0]:
-                                            groups[x] -= j
-                        done = 1
-    print(groups)
-    print("minimization")
+    #removing lines that we merge
+
     return dico, init, final
 
 

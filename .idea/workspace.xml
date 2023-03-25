@@ -44,6 +44,7 @@
       <updated>1679220392665</updated>
       <workItem from="1679220394924" duration="7314000" />
       <workItem from="1679246632941" duration="1493000" />
+      <workItem from="1679777776624" duration="5618000" />
     </task>
     <servers />
   </component>
@@ -51,7 +52,10 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Finite_Automata$Int2_6_main.coverage" NAME="Int2-6-main Coverage Results" MODIFIED="1679783427191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Finite_Automata$algo.coverage" NAME="algo Coverage Results" MODIFIED="1679765679817" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Finite_Automata$FA.coverage" NAME="FA Coverage Results" MODIFIED="1679765635158" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Finite_Automata$Int2_6_display.coverage" NAME="Int2-6-display Coverage Results" MODIFIED="1679781726215" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Finite_Automata$Int2_6_algo.coverage" NAME="Int2-6-algo Coverage Results" MODIFIED="1679783422178" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
