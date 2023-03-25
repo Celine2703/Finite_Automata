@@ -35,11 +35,14 @@ def is_deterministic(dico, init, final, alphabet):
             if initstate == -1:
                 initstate = i
             else:
+                print ('more than one initial state')
                 return -2
     #test if there is more than one transition for a letter
     for i in range (len(dico)):
         for lettre in alphabet:
             if len(dico[i][lettre]) > 1:
+                print ('more than one transition for a letter in state', i)
+                print ('dico[i][lettre] = ', dico[i][lettre])
                 return i
     return -1
 

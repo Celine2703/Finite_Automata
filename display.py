@@ -1,6 +1,6 @@
 from tabulate import tabulate
 
-def display_ligne(dico, init, final, alphabet, i, traduction):
+def display_ligne(dico, init, final, alphabet, i, traduction, trueindex):
     tab = []
     tab.append('')
     if (init[i] == 1):
@@ -8,11 +8,22 @@ def display_ligne(dico, init, final, alphabet, i, traduction):
     if (final[i] == 1):
         tab[0] += 'F'
     if traduction:
-        key = get_key(i, traduction)
-        if key:
-            tab.append(key.replace("[", "").replace("]", "").replace(", ", "·"))
+        if trueindex == None:
+            key = get_key(i, traduction)
+            if key:
+                tab.append(key.replace("[", "").replace("]", "").replace(", ", "·"))
+            else:
+                tab.append(i)
         else:
-            tab.append(i)
+            # print ("i = ", i, "trueindex = ", trueindex)
+            key = get_key(i, trueindex)
+            if key:
+                # print("key", key)
+                tab.append(key)
+            else :
+                index = i
+                tab.append(index)
+                print ("index = ", index)
     else:
         tab.append(i)
     for j in range(len(alphabet)):
@@ -20,7 +31,7 @@ def display_ligne(dico, init, final, alphabet, i, traduction):
             tab.append('--')
         else:
             if traduction:
-                key = get_key(int(str(dico[i][alphabet[j]]).replace("[", "").replace("]", "")), traduction)
+                key = get_key((str(dico[i][alphabet[j]]).replace("[", "").replace("]", "")), traduction)
                 if key:
                     tab.append(key.replace(", ", "·"))
                 else:
@@ -29,16 +40,16 @@ def display_ligne(dico, init, final, alphabet, i, traduction):
                 tab.append(dico[i][alphabet[j]])
     return (tab)
 
-def display_table(dico, init, final, alphabet, traduction = None):
-    print ("dico = ", dico)
+def display_table(dico, init, final, alphabet, traduction = None, trueindex = None):
     tab = []
     header = []
     header.append('')
     header.append('State')
+    print ("\ndico end = ", dico)
     for i in range(len(alphabet)):
         header.append(alphabet[i])
     for i in range(len(dico)):
-        tab.append(display_ligne(dico, init, final, alphabet, i, traduction))
+        tab.append(display_ligne(dico, init, final, alphabet, i, traduction, trueindex))
     print(tabulate(tab, headers=header, tablefmt='pipe'))
 
 #function to get key from value in a dictionnary

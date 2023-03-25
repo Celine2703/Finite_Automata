@@ -60,14 +60,124 @@ def multiples_entry(dico, init, final, alphabet):
 
 def init_determinization(dico, init, final, alphabet, traduction):
     traduction = {}
-    if (multiples_entry(dico, init, final, alphabet)):
+    new_dico = []
+    new_init = []
+    new_final = []
+    traduction = {}
         #add a new state
-        if (info.if_empty_word(dico, init, final, alphabet)):
-            final.append(1)
-        else:
-            final.append(0)
-        init.append(1)
-        dico.append({})
+    if (info.if_empty_word(dico, init, final, alphabet)):
+        new_final.append(1)
+    else:
+        new_final.append(0)
+    new_init.append(1)
+    new_dico.append({})
+    list_init = list_init_states(init)
+    if (alphabet[0] == '€'):
+        list_init = add_empty_list(dico, list_init)
+    else :
+        list_init.sort()
+    traduction[str(list_init)] = 0
+    print ("list_init = ", list_init)
+    for state in list_init:
+        for lettre in alphabet:
+            if (lettre == '€'):
+                continue
+            if (dico[state][lettre] != [-1]):
+                if (new_dico[0].get(lettre) == None):
+                    new_dico[0][lettre] = []
+                for transition in dico[state][lettre]:
+                    if (transition not in new_dico[0][lettre] and transition != -1):
+                        new_dico[0][lettre].append(transition)
+                        new_dico[0][lettre].sort()
+    print("new_dico = ", new_dico)
+    return traduction, new_dico, new_init, new_final
+
+        # for i in list_init:
+        #     for lettre in alphabet:
+
+                # if (dico[i][lettre] != [-1]):
+                #     if (new_dico[0].get(lettre) == None):
+                #         new_dico[0][lettre] = []
+                #     for transition in dico[i][lettre]:
+                #         if (transition not in new_dico[0][lettre]):
+                #             new_dico[0][lettre].append(transition)
+                #             new_dico[0][lettre] = sorted(new_dico[0][lettre])
+        # add the transitions to the new state
+
+def list_init_states(init):
+    list_init = []
+    for i in range(len(init)):
+        if (init[i] == 1):
+            list_init.append(i)
+    return list_init
+
+def add_empty_list(dico, list_prime):
+    added = 0
+    for elem in list_prime:
+        if (elem not in dico[elem]['€']):
+            for state in dico[elem]['€']:
+                if (state not in list_prime and state != -1):
+                    list_prime.append(state)
+                    added = 1
+                    list_prime = list(set(list_prime))
+    list_prime = sorted(list_prime)
+    if (added == 1):
+        return (add_empty_list(dico, list_prime))
+    return list_prime
+
+    
+
+def determinization2(dico, init, final, alphabet, traduction):
+    traduction, new_dico, new_init, new_final = init_determinization(dico, init, final, alphabet, traduction)
+    trueindex = {}
+    for state in new_dico:
+        for lettre in alphabet :
+            if (lettre == '€'):
+                continue
+            for transition in state[lettre]:
+                if transition == -1:
+                    continue
+                list_new_state = [transition]
+                if (alphabet[0] == '€'):
+                    list_new_state = add_empty_list(dico, list_new_state)
+                if (str(list_new_state) not in traduction.keys() and trueindex.get(str(state[lettre])) == None):
+                    traduction[str(list_new_state)] = transition
+                if(str(state[lettre]) not in trueindex.keys()):
+                    trueindex[str(state[lettre])] = len(new_dico)
+                    new_dico.append({'a': [-1], 'b': [-1]})
+                    new_init.append(0)
+                    new_final.append(0)
+                for newletter in alphabet:
+                    if (newletter == '€'):
+                        continue
+        
+                    if (new_dico[(trueindex[str(state[lettre])])].get(newletter) == None or new_dico[(trueindex[str(state[lettre])])][newletter] == [-1]):
+                        new_dico[(trueindex[str(state[lettre])])][newletter] = []
+                    
+                    if (list_transi(list_new_state, newletter, dico) != [-1] and list_transi(list_new_state, newletter, dico) not in new_dico[(trueindex[str(state[lettre])])][newletter]):
+                        new_dico[(trueindex[str(state[lettre])])][newletter] += list_transi(list_new_state, newletter, dico)
+                        state[lettre] = list (set(state[lettre]))
+                        new_dico[(trueindex[str(state[lettre])])][newletter] = list(set(new_dico[(trueindex[str(state[lettre])])][newletter]))
+                       
+                    if (new_dico[(trueindex[str(state[lettre])])][newletter] == []):
+                        new_dico[(trueindex[str(state[lettre])])][newletter] = [-1]
+    new_alphabet = []
+    for letter in alphabet:
+        if (letter != '€'):
+            new_alphabet.append(letter)
+    print("new_dico = ", new_dico)
+    return new_dico, new_init, new_final, new_alphabet, traduction, trueindex
+
+def list_transi (list_states, letter, dico):
+    ret = []
+    for i in list_states:
+        for j in dico[i][letter]:
+            if (j not in ret and j != -1):
+                ret.append(j)
+                ret.sort()
+    if ret == []:
+        ret.append(-1)
+    return ret
 
 def determinization(dico, init, final, alphabet, traduction):
     if (multiples_entry(dico, init, final, alphabet)):
@@ -112,13 +222,10 @@ def determinization(dico, init, final, alphabet, traduction):
 
 def findtraduction(traduction ,transition):
     out = []
-    ok = 1
     
     print ("transition = ", transition)
     for i in transition:
         if (disp.get_key(i, traduction) != False):
-            ok = 0
-            # print("CELINE disp.get_key(i, traduction) = ", disp.get_key(i, traduction))
             tmp = disp.get_key(i, traduction)
             s = tmp.strip('[]')  # supprimer les crochets du début et de la fin de la chaîne
             lst = [int(x) for x in s.split(',')]

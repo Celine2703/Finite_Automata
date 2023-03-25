@@ -36,6 +36,7 @@ def test_automaton(dico, init, final, alphabet):
 
 
 def main():
+    trueindex = 0
     # the menu of our program
     print("\nWhich automaton do you want? (type 0 to quit)")
     x = input("-> ")
@@ -65,14 +66,14 @@ def main():
                     algo.completion(dico, init, final, alphabet)
                     print("Completion done, the automaton is now:")
             else:
-                traduction = algo.determinization(dico, init, final, alphabet, traduction)
+                dico, init,final, alphabet,traduction,trueindex = algo.determinization2(dico, init, final, alphabet, traduction)
                 print("traduction = ", traduction)
                 if info.is_complete(dico, init, final, alphabet) == -1:
                     print("Determinization done, the automaton is already complete, it is now:")
                 else:
-                    dico, init, final = algo.completion(dico, init, final, alphabet)
+                    # dico, init, final = algo.completion(dico, init, final, alphabet)
                     print("Determinization and completion done, the automaton is now:")
-            disp.display_table(dico, init, final, alphabet, traduction)
+            disp.display_table(dico, init, final, alphabet, traduction,trueindex)
         elif y == '3':
             dico, init, final = algo.minimization(dico, init, final, alphabet)
             disp.display_table(dico, init, final, alphabet, traduction)
