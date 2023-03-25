@@ -105,8 +105,12 @@ def main():
                 print("Another word? (type 'end' to return to the menu)")
                 w = input("-> ")
         elif y == '5':
-            algo.complementary_automaton(dico, init, final, alphabet)
-            disp.display_table(dico, init, final, alphabet, traduction)
+            if(info.is_deterministic(dico, init, final, alphabet) != -1):
+                print("The automaton is not deterministic, it cannot be complemented.")
+            if(info.is_complete(dico, init, final, alphabet) != -1):
+                print("The automaton is not complete, it cannot be complemented.")
+            algo.complementarisation(dico, init, final, alphabet)
+            disp.display_table(dico, init, final, alphabet, traduction, trueindex)
         elif y == '6':
             main()
         elif y == '0':

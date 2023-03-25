@@ -44,8 +44,7 @@ def is_deterministic(dico, init, final, alphabet):
     return -1
 
 def is_complete(dico, init, final, alphabet):
-    if alphabet == ['']:
-        print ("alphabet vide")
+    if alphabet == []:
         return -1
     for i in range(len(dico)):
         for lettre in alphabet:

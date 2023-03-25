@@ -16,8 +16,7 @@ def display_ligne(dico, init, final, alphabet, i, traduction, trueindex):
                 tab.append(i)
         else:
             key = get_key(i, trueindex)
-            print ("key for  ", i, " is " , key)
-            if key:
+            if key and key not in tab:
                 tab.append(key.replace("[", "").replace("]", "").replace(", ", "·"))
             else :
                 index = i

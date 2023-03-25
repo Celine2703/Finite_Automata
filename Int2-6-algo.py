@@ -117,7 +117,7 @@ def add_empty_list(dico, list_prime):
     return list_prime
 
 def determinization2(dico, init, final, alphabet, traduction):
-    traduction, new_dico, new_init, new_final , trueindex= init_determinization(dico, init, final, alphabet, traduction)
+    traduction, new_dico, new_init, new_final , trueindex = init_determinization(dico, init, final, alphabet, traduction)
     for state in new_dico:
         for lettre in alphabet :
             if (lettre == '€'):
@@ -128,11 +128,13 @@ def determinization2(dico, init, final, alphabet, traduction):
                 list_new_state = [transition]
                 if (alphabet[0] == '€'):
                     list_new_state = add_empty_list(dico, list_new_state)
+                    list_new_state = list(set(list_new_state))
+                    list_new_state = sorted(list_new_state)
                 if (str(list_new_state) not in traduction.keys() and trueindex.get(str(state[lettre])) == None):
                     traduction[str(list_new_state)] = transition
                 if(str(state[lettre]) not in trueindex.keys()):
                     trueindex[str(state[lettre])] = len(new_dico)
-                    new_dico.append({'a': [-1], 'b': [-1]})
+                    new_dico.append({})
                     new_init.append(0)
                     if (alphabet[0] == '€' and info.is_final_state(final, list_new_state) == True):
                         new_final.append(1)
@@ -143,7 +145,7 @@ def determinization2(dico, init, final, alphabet, traduction):
                 for newletter in alphabet:
                     if (newletter == '€'):
                         continue
-        
+                    
                     if (new_dico[(trueindex[str(state[lettre])])].get(newletter) == None or new_dico[(trueindex[str(state[lettre])])][newletter] == [-1]):
                         new_dico[(trueindex[str(state[lettre])])][newletter] = []
                     
@@ -152,9 +154,12 @@ def determinization2(dico, init, final, alphabet, traduction):
                         state[lettre] = list (set(state[lettre]))
                         state[lettre].sort()
                         new_dico[(trueindex[str(state[lettre])])][newletter] = list(set(new_dico[(trueindex[str(state[lettre])])][newletter]))
+                        new_dico[(trueindex[str(state[lettre])])][newletter].sort()
                        
                     if (new_dico[(trueindex[str(state[lettre])])][newletter] == []):
                         new_dico[(trueindex[str(state[lettre])])][newletter] = [-1]
+
+    
     new_alphabet = []
     for letter in alphabet:
         if (letter != '€'):
@@ -182,7 +187,8 @@ def findtraduction(traduction ,transition):
             lst = [int(x) for x in s.split(',')]
             out = out + lst
         else:
-           out.append(i)
+            if (i not in out):
+                out.append(i)
     out = list(set(out))
     out.sort()
     return out
@@ -244,7 +250,7 @@ def minimization(dico, init, final, alphabet):
     return dico, init, final
 
 
-def complementarisaton(dico, init, final, alphabet):
+def complementarisation(dico, init, final, alphabet):
     for state in range(len(final)):
         if (final[state] == 1):
             final[state] = 0
