@@ -1,7 +1,7 @@
-import information as info
-import display as disp
-import algo as algo
-import init as ini
+import Int2-6-information as info
+import Int2-6-display as disp
+import Int2-6-algo as algo
+import Int2-6-init as ini
 
 def print_menu():
     print("\nWhat do you want to do?\n")

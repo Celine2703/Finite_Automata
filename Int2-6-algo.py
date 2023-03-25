@@ -1,6 +1,6 @@
-import information as info
-import display as disp
-import bisect
+import Int2-6-information as info
+import Int2-6-display as disp
+# import bisect
 
 def standardization(dico, init, final, alphabet, traduction):
     string = []
