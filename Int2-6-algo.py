@@ -1,4 +1,5 @@
 import copy
+import time
 import importlib.util
 
 # Import Int2-6-information
@@ -241,24 +242,15 @@ def minimization(dico, init, final, alphabet):
                 if pattern[i] == default_pattern:
                     if groups[i] > 0:
                         groups[i] = groups[j]
+    # displaying partitions of this first separation
+    print("First iteration of the minimisation:")
+    disp.display_partition(dico, init, final, alphabet, groups)
+    time.sleep(1)
     # 2nd step: separating depending on 1) if states of arrival belongs to the group of the state we are on
     #           2) if not, recognizing other states doing the same that goes in the same group
-    print("Separation 1:")
-    print(groups)
-    for i in range(-len(groups), len(groups)+1):
-        partition = []
-        list_index = []
-        for index in range(len(groups)):
-            if groups[index] == i:
-                list_index.append(index)
-        for j in list_index:
-            partition.append(dico[j])
-        if i in groups:
-            disp.display_table(partition, init, final, alphabet)
-            print("\n")
     old_groups =[0]*len(groups)
-    # processing until there is no more changes
-    while old_groups != groups:
+    iteration = 2
+    while old_groups != groups: # processing until there is no more changes
         count_pos, count_neg = 0,0
         for i in range (len(groups)):
             if old_groups[i] != groups[i]:
@@ -327,10 +319,43 @@ def minimization(dico, init, final, alphabet):
                                                 if free_number >= count_neg:
                                                     groups[x] = free_number
                             done = 1
-        print(groups)
+        #displaying partitions
+        if old_groups != groups:
+            if iteration == 2:
+                print("\n" ,iteration, "nd iteration of the minimisation:\n")
+            elif iteration == 3:
+                print("\n" ,iteration, "rd iteration of the minimisation:\n")
+            else:
+                print("\n" ,iteration, "th iteration of the minimisation:\n")
+            disp.display_partition(dico, init, final, alphabet, groups)
+            time.sleep(1)
+            iteration += 1
 
-    print(groups)
     #removing lines that we merge
+    for i in range(-len(groups), len(groups)+1):
+        list_index = []
+        for index in range(len(groups)):
+            if groups[index] == i:
+                list_index.append(index)
+        for x in range(1, len(list_index)):
+            for lettre in alphabet:
+                for new_state in dico[list_index[x]].get(lettre):
+                    if new_state not in list_index[1:]:
+                        if new_state not in dico[list_index[0]].get(lettre):
+                            dico[list_index[0]].get(lettre).append(new_state)
+                for remove_element in list_index[1:]:
+                    for j in range(len(dico[list_index[0]].get(lettre))):
+                        if dico[list_index[0]].get(lettre)[j] == remove_element:
+                            dico[list_index[0]].get(lettre)[j] = list_index[0]
+        for remove_element in list_index[1:]:
+            print("The state", remove_element, "will be merge into the state", list_index[0], "!")
+            dico.remove(dico[remove_element])
+            if final[remove_element] == 1:
+                final[list_index[0]] = 1
+            final.remove(final[remove_element])
+            if init[remove_element] == 1:
+                init[list_index[0]] = 1
+            init.remove(init[remove_element])
 
     return dico, init, final
 

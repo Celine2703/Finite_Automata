@@ -98,6 +98,7 @@ def main():
         elif y == '3':
             dico, init, final = algo.minimization(dico, init, final, alphabet)
             minimized = True
+            print("\nMinimization done, the automaton is now:")
             disp.display_table(dico, init, final, alphabet, traduction)
         elif y == '4':
             print("Input your word. (type 'end' to return to the menu)")
