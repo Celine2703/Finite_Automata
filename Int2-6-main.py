@@ -99,7 +99,7 @@ def main():
             disp.display_table(dico, init, final, alphabet, traduction, trueindex)
             determinized = True
         elif y == '3':
-            if determinized == 1:
+            if determinized:
                 dico, init, final, trueindex = algo.minimization(dico, init, final, alphabet, trueindex)
                 minimized = True
                 print("\nMinimization done, the automaton is now:")
