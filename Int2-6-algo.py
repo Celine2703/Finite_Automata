@@ -212,8 +212,9 @@ def list_transi (list_states, letter, dico):
 def minimization(dico, init, final, alphabet, trueindex):
     minimization_change = 0
     # displaying changements in name of states
-    for i in range(len(trueindex)):
-        print("The state", disp.get_key(i, trueindex), "is renamed: ", i)
+    if trueindex != None:
+        for i in range(len(trueindex)):
+            print("The state", disp.get_key(i, trueindex), "is renamed: ", i)
     groups = []
     # separating final and initial states
     for isfinal in final:
