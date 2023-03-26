@@ -12,8 +12,9 @@ disp = importlib.util.module_from_spec(disp_spec)
 disp_spec.loader.exec_module(disp)
 # import bisect
 
+# function for the standardization of an automaton : add a new initial state and add the transitions to the new state
 def standardization(dico, init, final, alphabet, traduction):
-    string = []
+    list_init = []
     #add a new state
     if (info.if_empty_word(dico, init, final, alphabet)):
         final.append(1)
@@ -27,9 +28,9 @@ def standardization(dico, init, final, alphabet, traduction):
     for state in range(len(dico) - 1):
         for lettre in alphabet:
             if (init[state] == 1):
-                if (state not in string):
-                    string.append(state)
-                    string = sorted(string)
+                if (state not in list_init):
+                    list_init.append(state)
+                    list_init = sorted(list_init)
                 if (dico[state][lettre] != [-1]):
                     if (dico[len(dico) - 1][lettre] == [-1]):
                         dico[len(dico) - 1][lettre] = []
@@ -37,13 +38,14 @@ def standardization(dico, init, final, alphabet, traduction):
                         if (transition not in dico[len(dico) - 1][lettre]):
                             dico[len(dico) - 1][lettre].append(transition)
                             dico[len(dico) - 1][lettre] = sorted(dico[len(dico) - 1][lettre])
-                          
+    #the other states are not initial                     
     for i in range(len(init) - 1):
         init[i] = 0
-    if (len(string) > 1):
-        traduction[str(string)] = len(dico) - 1
+    if (len(list_init) > 1):
+        traduction[str(list_init)] = len(dico) - 1
     return traduction
 
+# fuction that complete an automaton : add a new think state and add the transitions to it
 def completion(dico, init, final, alphabet):
     #add a new state
     dico.append({})
@@ -52,13 +54,14 @@ def completion(dico, init, final, alphabet):
     # add the transitions frome the new state to the new state (think state)
     for lettre in alphabet:
         dico[len(dico) - 1][lettre] = [len(dico) - 1]
-    # add the transitions to the new state
+    # add the transitions to the new think state
     for state in range(len(dico) - 1):
         for lettre in alphabet:
             if (dico[state][lettre] == [-1]):
                 dico[state][lettre] = [len(dico) - 1]
     return dico, init, final
 
+# fuction that create the initial state of the deterministic automaton
 def init_determinization(dico, init, final, alphabet, traduction):
     traduction = {}
     new_dico = []
@@ -78,12 +81,12 @@ def init_determinization(dico, init, final, alphabet, traduction):
         list_init = add_empty_list(dico, list_init)
         traduction[str(list_init)] = 0
         trueindex[0] = 0
-
     else :
         list_init.sort()
         traduction[str(list_init)] = list_init
         trueindex[str(list_init)] = 0        
     
+    # add the transitions to the new state
     for state in list_init:
         for lettre in alphabet:
             if (lettre == '€'):
@@ -97,6 +100,7 @@ def init_determinization(dico, init, final, alphabet, traduction):
                         new_dico[0][lettre].sort()
     return traduction, new_dico, new_init, new_final, trueindex
 
+# fuction that gives the list of initial states
 def list_init_states(init):
     list_init = []
     for i in range(len(init)):
@@ -104,6 +108,7 @@ def list_init_states(init):
             list_init.append(i)
     return list_init
 
+# fuction that add the transitions with empty word from the states : give the "prime" states
 def add_empty_list(dico, list_prime):
     added = 0
     for elem in list_prime:
@@ -118,18 +123,24 @@ def add_empty_list(dico, list_prime):
         return (add_empty_list(dico, list_prime))
     return list_prime
 
+# function for the determinization of an automaton : add a new state for each transition
 def determinization2(dico, init, final, alphabet, traduction):
+    #call to the fuction that create the initial state
     traduction, new_dico, new_init, new_final , trueindex = init_determinization(dico, init, final, alphabet, traduction)
+    #add the new state for each transition
     for state in new_dico:
         for lettre in alphabet :
-            if (lettre == '€'):
+            #not adding the transition for the empty word or an empty transition
+            if (lettre == '€'): 
                 continue
             for transition in state[lettre]:
                 if transition == -1:
                     continue
+                
+                #add the new state
                 list_new_state = [transition]
                 if (alphabet[0] == '€'):
-                    list_new_state = add_empty_list(dico, list_new_state)
+                    list_new_state = add_empty_list(dico, list_new_state) #call to the function that add the empty transition to the new state
                     list_new_state = list(set(list_new_state))
                     list_new_state = sorted(list_new_state)
                 if (str(list_new_state) not in traduction.keys() and trueindex.get(str(state[lettre])) == None):
@@ -144,6 +155,8 @@ def determinization2(dico, init, final, alphabet, traduction):
                         new_final.append(1)
                     else:
                         new_final.append(0)
+    
+                #add the transition to the new state
                 for newletter in alphabet:
                     if (newletter == '€'):
                         continue
@@ -161,14 +174,16 @@ def determinization2(dico, init, final, alphabet, traduction):
                     if (new_dico[(trueindex[str(state[lettre])])][newletter] == []):
                         new_dico[(trueindex[str(state[lettre])])][newletter] = [-1]
 
-    
+    #remove the empty word from the alphabet
     new_alphabet = []
     for letter in alphabet:
         if (letter != '€'):
             new_alphabet.append(letter)
+    #call to the function that translate the states of the new automaton
     build_automaton(new_dico, new_init, new_final, new_alphabet, traduction, trueindex)
     return new_dico, new_init, new_final, new_alphabet, traduction, trueindex
 
+# fuction that return the list of the transition states for a given list of state(s) and a given letter
 def list_transi (list_states, letter, dico):
     ret = []
     for i in list_states:
@@ -310,7 +325,7 @@ def minimization(dico, init, final, alphabet):
 
     return dico, init, final
 
-
+# function that returns the complementary automaton : tranform final states into non-final states and vice-versa
 def complementarisation(dico, init, final, alphabet):
     for state in range(len(final)):
         if (final[state] == 1):
@@ -319,12 +334,14 @@ def complementarisation(dico, init, final, alphabet):
             final[state] = 1
     return dico, init, final
 
+# fuction that returns if the word is recognized by the automaton
 def recognize_word(dico, init, final, alphabet, word):
     for lettre in word:
         if (lettre not in alphabet):
             return False
+    #following the transition table
     for i in range(len(init)):
-        if (init[i] == 1):
+        if (init[i] == 1): #beginning with the initial state
             state = i
             for lettre in word:
                 if(dico[state][lettre] == [-1]):
@@ -336,6 +353,7 @@ def recognize_word(dico, init, final, alphabet, word):
     else:
         return False
 
+# fuction that translate the states of the automaton to match the index of the state in the dictionnary
 def build_automaton(dico, init, final, alphabet, traduction, trueindex):
     for state in dico:
         # replace the state that is a list by the index of the state in the dico

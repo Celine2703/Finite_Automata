@@ -28,6 +28,8 @@ def is_standard(dico, init, final, alphabet):
     return -1
 
 def is_deterministic(dico, init, final, alphabet):
+    if ("€" in alphabet):
+        return -3
     initstate = -1
     #test if there is only one initial state
     for i in range(len(init)):

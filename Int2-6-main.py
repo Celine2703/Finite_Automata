@@ -44,6 +44,8 @@ def test_automaton(dico, init, final, alphabet):
         print("The automaton is deterministic")
     elif x == -2:
         print("Not deterministic: more than one initial state")
+    elif x == -3:
+        print("Not deterministic: transition with empty word")
     else:
         print("Not deterministic: more than one transition for a letter in state", x)
     x = info.is_complete(dico, init, final, alphabet)
