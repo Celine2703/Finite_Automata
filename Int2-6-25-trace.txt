@@ -1,0 +1,118 @@
+
+Which automaton do you want? (type 0 to quit)
+-> 
+|    |   State | a      | b      | c      | d      |
+|:---|--------:|:-------|:-------|:-------|:-------|
+| F  |       0 | --     | --     | --     | --     |
+| I  |       1 | [1, 2] | [3]    | [4]    | [0]    |
+|    |       2 | --     | [2, 3] | [4]    | [0]    |
+|    |       3 | --     | --     | [3, 4] | [0]    |
+|    |       4 | --     | --     | --     | [0, 4] |
+Not standard: transition to initial state
+Not deterministic: more than one transition for a letter in state 1
+Not complete: transition to nowhere in state 0
+
+What do you want to do?
+
+1- Standardisation
+2- Determinization and completion
+3- Minimization
+4- Read a word
+5- Complementary automaton
+6- Select another automaton
+0- Quit
+
+-> Standardization done, the automaton is now:
+
+|    |   State | a      | b      | c      | d      |
+|:---|--------:|:-------|:-------|:-------|:-------|
+| F  |       0 | --     | --     | --     | --     |
+|    |       1 | [1, 2] | [3]    | [4]    | [0]    |
+|    |       2 | --     | [2, 3] | [4]    | [0]    |
+|    |       3 | --     | --     | [3, 4] | [0]    |
+|    |       4 | --     | --     | --     | [0, 4] |
+| I  |       5 | [1, 2] | [3]    | [4]    | [0]    |
+
+What do you want to do?
+
+1- Standardisation
+2- Determinization and completion
+3- Minimization
+4- Read a word
+5- Complementary automaton
+6- Select another automaton
+0- Quit
+
+-> Determinization and completion done, the automaton is now:
+
+|    | State   | a     | b     | c     | d     |
+|:---|:--------|:------|:------|:------|:------|
+| I  | 5       | [1·2] | [3]   | [4]   | [0]   |
+|    | 1·2     | [1·2] | [2·3] | [4]   | [0]   |
+|    | 3       | [8]   | [8]   | [3·4] | [0]   |
+|    | 4       | [8]   | [8]   | [8]   | [0·4] |
+| F  | 0       | [8]   | [8]   | [8]   | [8]   |
+|    | 2·3     | [8]   | [2·3] | [3·4] | [0]   |
+|    | 3·4     | [8]   | [8]   | [3·4] | [0·4] |
+| F  | 0·4     | [8]   | [8]   | [8]   | [0·4] |
+|    | 8       | [8]   | [8]   | [8]   | [8]   |
+
+What do you want to do?
+
+1- Standardisation
+2- Determinization and completion
+3- Minimization
+4- Read a word
+5- Complementary automaton
+6- Select another automaton
+0- Quit
+
+-> Input your word. (type 'end' to return to the menu)
+-> [1]
+[1]
+[1]
+No: this word has not been recognized!
+Another word? (type 'end' to return to the menu)
+-> [1]
+[5]
+[8]
+[8]
+No: this word has not been recognized!
+Another word? (type 'end' to return to the menu)
+-> 
+What do you want to do?
+
+1- Standardisation
+2- Determinization and completion
+3- Minimization
+4- Read a word
+5- Complementary automaton
+6- Select another automaton
+0- Quit
+
+-> Complementary automaton with the CDFA:
+
+|     | State   | a     | b     | c     | d     |
+|:----|:--------|:------|:------|:------|:------|
+| I F | 5       | [1·2] | [3]   | [4]   | [0]   |
+| F   | 1·2     | [1·2] | [2·3] | [4]   | [0]   |
+| F   | 3       | [8]   | [8]   | [3·4] | [0]   |
+| F   | 4       | [8]   | [8]   | [8]   | [0·4] |
+|     | 0       | [8]   | [8]   | [8]   | [8]   |
+| F   | 2·3     | [8]   | [2·3] | [3·4] | [0]   |
+| F   | 3·4     | [8]   | [8]   | [3·4] | [0·4] |
+|     | 0·4     | [8]   | [8]   | [8]   | [0·4] |
+| F   | 8       | [8]   | [8]   | [8]   | [8]   |
+
+What do you want to do?
+
+1- Standardisation
+2- Determinization and completion
+3- Minimization
+4- Read a word
+5- Complementary automaton
+6- Select another automaton
+0- Quit
+
+-> Goodbye.
+

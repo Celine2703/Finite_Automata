@@ -1,0 +1,108 @@
+
+Which automaton do you want? (type 0 to quit)
+-> 
+|    |   State | a   |
+|:---|--------:|:----|
+| F  |       0 | [0] |
+| I  |       1 | [2] |
+|    |       2 | [3] |
+| F  |       3 | [4] |
+| F  |       4 | [5] |
+| F  |       5 | --  |
+| F  |       6 | [7] |
+| F  |       7 | [0] |
+The automaton is standard
+The automaton is deterministic
+Not complete: transition to nowhere in state 5
+
+What do you want to do?
+
+1- Standardisation
+2- Determinization and completion
+3- Minimization
+4- Read a word
+5- Complementary automaton
+6- Select another automaton
+0- Quit
+
+-> This automaton is already standard.
+
+What do you want to do?
+
+1- Standardisation
+2- Determinization and completion
+3- Minimization
+4- Read a word
+5- Complementary automaton
+6- Select another automaton
+0- Quit
+
+-> Completion done, the automaton is now:
+
+|    |   State | a   |
+|:---|--------:|:----|
+| F  |       0 | [0] |
+| I  |       1 | [2] |
+|    |       2 | [3] |
+| F  |       3 | [4] |
+| F  |       4 | [5] |
+| F  |       5 | [8] |
+| F  |       6 | [7] |
+| F  |       7 | [0] |
+|    |       8 | [8] |
+
+What do you want to do?
+
+1- Standardisation
+2- Determinization and completion
+3- Minimization
+4- Read a word
+5- Complementary automaton
+6- Select another automaton
+0- Quit
+
+-> Input your word. (type 'end' to return to the menu)
+-> [2]
+[3]
+[4]
+Yes: this word has been recognized!
+Another word? (type 'end' to return to the menu)
+-> No: this word has not been recognized!
+Another word? (type 'end' to return to the menu)
+-> 
+What do you want to do?
+
+1- Standardisation
+2- Determinization and completion
+3- Minimization
+4- Read a word
+5- Complementary automaton
+6- Select another automaton
+0- Quit
+
+-> Complementary automaton with the CDFA:
+
+|     |   State | a   |
+|:----|--------:|:----|
+|     |       0 | [0] |
+| I F |       1 | [2] |
+| F   |       2 | [3] |
+|     |       3 | [4] |
+|     |       4 | [5] |
+|     |       5 | [8] |
+|     |       6 | [7] |
+|     |       7 | [0] |
+| F   |       8 | [8] |
+
+What do you want to do?
+
+1- Standardisation
+2- Determinization and completion
+3- Minimization
+4- Read a word
+5- Complementary automaton
+6- Select another automaton
+0- Quit
+
+-> Goodbye.
+

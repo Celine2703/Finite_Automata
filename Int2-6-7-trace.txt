@@ -1,0 +1,94 @@
+
+Which automaton do you want? (type 0 to quit)
+-> 
+|    |   State | a      |
+|:---|--------:|:-------|
+| F  |       0 | --     |
+| I  |       1 | [0, 1] |
+Not standard: transition to initial state
+Not deterministic: more than one transition for a letter in state 1
+Not complete: transition to nowhere in state 0
+
+What do you want to do?
+
+1- Standardisation
+2- Determinization and completion
+3- Minimization
+4- Read a word
+5- Complementary automaton
+6- Select another automaton
+0- Quit
+
+-> Standardization done, the automaton is now:
+
+|    |   State | a      |
+|:---|--------:|:-------|
+| F  |       0 | --     |
+|    |       1 | [0, 1] |
+| I  |       2 | [0, 1] |
+
+What do you want to do?
+
+1- Standardisation
+2- Determinization and completion
+3- Minimization
+4- Read a word
+5- Complementary automaton
+6- Select another automaton
+0- Quit
+
+-> Determinization done, the automaton is already complete, it is now:
+
+|    | State   | a     |
+|:---|:--------|:------|
+| I  | 2       | [0·1] |
+| F  | 0·1     | [0·1] |
+
+What do you want to do?
+
+1- Standardisation
+2- Determinization and completion
+3- Minimization
+4- Read a word
+5- Complementary automaton
+6- Select another automaton
+0- Quit
+
+-> Input your word. (type 'end' to return to the menu)
+-> [1]
+[1]
+[1]
+Yes: this word has been recognized!
+Another word? (type 'end' to return to the menu)
+-> No: this word has not been recognized!
+Another word? (type 'end' to return to the menu)
+-> 
+What do you want to do?
+
+1- Standardisation
+2- Determinization and completion
+3- Minimization
+4- Read a word
+5- Complementary automaton
+6- Select another automaton
+0- Quit
+
+-> Complementary automaton with the CDFA:
+
+|     | State   | a     |
+|:----|:--------|:------|
+| I F | 2       | [0·1] |
+|     | 0·1     | [0·1] |
+
+What do you want to do?
+
+1- Standardisation
+2- Determinization and completion
+3- Minimization
+4- Read a word
+5- Complementary automaton
+6- Select another automaton
+0- Quit
+
+-> Goodbye.
+
