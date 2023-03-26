@@ -205,7 +205,10 @@ def list_transi (list_states, letter, dico):
         ret.append(-1)
     return ret
 
-def minimization(dico, init, final, alphabet):
+def minimization(dico, init, final, alphabet, trueindex):
+    # displaying changements in name of states
+    for i in range(len(trueindex)):
+        print("The state", disp.get_key(i, trueindex), "is renamed: ", i)
     groups = []
     # separating final and initial states
     for isfinal in final:
@@ -332,6 +335,7 @@ def minimization(dico, init, final, alphabet):
             iteration += 1
 
     #removing lines that we merge
+    list_of_removed_index = []
     for i in range(-len(groups), len(groups)+1):
         list_index = []
         for index in range(len(groups)):
@@ -348,8 +352,8 @@ def minimization(dico, init, final, alphabet):
                         if dico[list_index[0]].get(lettre)[j] == remove_element:
                             dico[list_index[0]].get(lettre)[j] = list_index[0]
         for i in range(1,len(list_index)):
-            print(i)
-            print("The state", list_index[-i], "will be merge into the state", list_index[0], "!")
+            print("\nThe state", list_index[-i], "will be merge into the state", list_index[0], "!")
+            list_of_removed_index.append(list_index[-1])
             del dico[list_index[-i]]
             if final[list_index[-i]] == 1:
                 final[list_index[0]] = 1
@@ -357,8 +361,16 @@ def minimization(dico, init, final, alphabet):
             if init[list_index[-i]] == 1:
                 init[list_index[0]] = 1
             del init[list_index[-i]]
-
-    return dico, init, final
+    #creating a new list of index
+    trueindex_new = {}
+    change = 0
+    for i in range(len(dico)):
+        if i in list_of_removed_index:
+            change += 1
+        i_list = [i+change]
+        trueindex_new[str(i_list)]=i
+    #displaying changements in name of states
+    return dico, init, final, trueindex_new
 
 # function that returns the complementary automaton : tranform final states into non-final states and vice-versa
 def complementarisation(dico, init, final, alphabet):

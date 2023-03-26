@@ -28,7 +28,7 @@ def display_partition(dico, init, final, alphabet, groups):
         if i in groups:
             partition_number += 1
             print("Partition number °", partition_number)
-            display_table(partition, newinit, newfinal, alphabet, True, trueindex, False)
+            display_table(partition, newinit, newfinal, alphabet, True , trueindex, False)
 
 # function that creates a line for the table_to_display
 def display_ligne(dico, init, final, alphabet, i, traduction, trueindex, donot):

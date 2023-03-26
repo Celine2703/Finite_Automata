@@ -96,7 +96,7 @@ def main():
                     print("Determinization and completion done, the automaton is now:")
             disp.display_table(dico, init, final, alphabet, traduction, trueindex)
         elif y == '3':
-            dico, init, final = algo.minimization(dico, init, final, alphabet)
+            dico, init, final, trueindex = algo.minimization(dico, init, final, alphabet, trueindex)
             minimized = True
             print("\nMinimization done, the automaton is now:")
             disp.display_table(dico, init, final, alphabet, traduction, trueindex)
