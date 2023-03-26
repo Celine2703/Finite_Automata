@@ -80,7 +80,7 @@ def display_table(dico, init, final, alphabet, traduction = None, trueindex = No
     header.append('State')
     for i in range(len(alphabet)):
         if(alphabet[i] == '€'):
-            header.append('ε')
+            header.append('E')
         else:
             header.append(alphabet[i])
     for i in range(len(dico)):
