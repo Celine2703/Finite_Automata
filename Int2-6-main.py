@@ -71,6 +71,7 @@ def main():
     test_automaton(dico, init, final, alphabet)
     y = -1
     minimized = False
+    determinized = False
     while y != 0:
         print_menu()
         y = input("-> ")
@@ -96,11 +97,15 @@ def main():
                     dico, init, final = algo.completion(dico, init, final, alphabet)
                     print("Determinization and completion done, the automaton is now:")
             disp.display_table(dico, init, final, alphabet, traduction, trueindex)
+            determinized = True
         elif y == '3':
-            dico, init, final, trueindex = algo.minimization(dico, init, final, alphabet, trueindex)
-            minimized = True
-            print("\nMinimization done, the automaton is now:")
-            disp.display_table(dico, init, final, alphabet, traduction, trueindex)
+            if determinized == 1:
+                dico, init, final, trueindex = algo.minimization(dico, init, final, alphabet, trueindex)
+                minimized = True
+                print("\nMinimization done, the automaton is now:")
+                disp.display_table(dico, init, final, alphabet, traduction, trueindex)
+            else:
+                print("Please determinize and complete this automaton before minimizing it.")
         elif y == '4':
             print("Input your word. (type 'end' to return to the menu)")
             w = input("-> ")
