@@ -69,19 +69,29 @@ def init_determinization(dico, init, final, alphabet, traduction):
     new_final = []
     traduction = {}
     trueindex = {}
+    fin =0
         #add a new state
-    if (info.if_empty_word(dico, init, final, alphabet)):
-        new_final.append(1)
-    else:
-        new_final.append(0)
+   
     new_init.append(1)
     new_dico.append({})
     list_init = list_init_states(init)
     if (alphabet[0] == '€'):
         list_init = add_empty_list(dico, list_init)
+        print (list_init)
+        for k in (list_init):
+            if (final[k]):
+                fin = 1
+        if (fin == 1):
+            new_final.append(1)
+        else:
+            new_final.append(0)
         traduction[str(list_init)] = 0
         trueindex[0] = 0
     else :
+        if (info.if_empty_word(dico, init, final, alphabet)):
+            new_final.append(1)
+        else:
+            new_final.append(0)
         list_init.sort()
         traduction[str(list_init)] = list_init
         trueindex[str(list_init)] = 0        
