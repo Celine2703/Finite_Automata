@@ -334,11 +334,11 @@ def minimization(dico, init, final, alphabet, trueindex):
         #displaying partitions
         if old_groups != groups:
             if iteration == 2:
-                print("\n" ,iteration, "nd iteration of the minimisation:\n")
+                print("\n",iteration,"nd iteration of the minimisation:\n")
             elif iteration == 3:
-                print("\n" ,iteration, "rd iteration of the minimisation:\n")
+                print("\n",iteration,"rd iteration of the minimisation:\n")
             else:
-                print("\n" ,iteration, "th iteration of the minimisation:\n")
+                print("\n",iteration,"th iteration of the minimisation:\n")
             disp.display_partition(dico, init, final, alphabet, groups)
             time.sleep(1)
             iteration += 1
@@ -361,7 +361,7 @@ def minimization(dico, init, final, alphabet, trueindex):
                         if dico[list_index[0]].get(lettre)[j] == remove_element:
                             dico[list_index[0]].get(lettre)[j] = list_index[0]
         for i in range(1,len(list_index)):
-            print("\nThe state", list_index[-i], "will be merge into the state", list_index[0], "!")
+            print("\nThe state", list_index[-i], "will be merged into the state", list_index[0], "!")
             minimization_change = 1
             list_of_removed_index.append(list_index[-1])
             del dico[list_index[-i]]
@@ -380,7 +380,7 @@ def minimization(dico, init, final, alphabet, trueindex):
         i_list = [i+change]
         trueindex_new[str(i_list)]=i
     if minimization_change == 0:
-        print("\nNo changes, automaton already minimised at it's best.")
+        print("\nNo changes, automaton already minimised at its best.")
     #displaying changements in name of states
     return dico, init, final, trueindex_new
 

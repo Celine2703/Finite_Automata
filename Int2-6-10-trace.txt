@@ -67,6 +67,93 @@ What do you want to do?
 6- Select another automaton
 0- Quit
 
+-> 3
+
+Separating final states and other states:
+
+Partition number ° 1
+|     |   State | a   | b   |
+|:----|--------:|:----|:----|
+| F   |       0 | [1] | [6] |
+| I F |       5 | [1] | [6] |
+Partition number ° 2
+|    |   State | a   | b   |
+|:---|--------:|:----|:----|
+|    |       1 | [2] | [2] |
+|    |       2 | [3] | [6] |
+|    |       3 | [4] | [4] |
+|    |       4 | [0] | [6] |
+|    |       6 | [6] | [6] |
+
+First iteration of the minimisation:
+
+Partition number ° 1
+|     |   State | a   | b   |
+|:----|--------:|:----|:----|
+| F   |       0 | [1] | [6] |
+| I F |       5 | [1] | [6] |
+Partition number ° 2
+|    |   State | a   | b   |
+|:---|--------:|:----|:----|
+|    |       1 | [2] | [2] |
+|    |       2 | [3] | [6] |
+|    |       3 | [4] | [4] |
+|    |       6 | [6] | [6] |
+Partition number ° 3
+|    |   State | a   | b   |
+|:---|--------:|:----|:----|
+|    |       4 | [0] | [6] |
+
+ 2 nd iteration of the minimisation:
+
+Partition number ° 1
+|     |   State | a   | b   |
+|:----|--------:|:----|:----|
+| F   |       0 | [1] | [6] |
+| I F |       5 | [1] | [6] |
+Partition number ° 2
+|    |   State | a   | b   |
+|:---|--------:|:----|:----|
+|    |       3 | [4] | [4] |
+Partition number ° 3
+|    |   State | a   | b   |
+|:---|--------:|:----|:----|
+|    |       6 | [6] | [6] |
+Partition number ° 4
+|    |   State | a   | b   |
+|:---|--------:|:----|:----|
+|    |       1 | [2] | [2] |
+Partition number ° 5
+|    |   State | a   | b   |
+|:---|--------:|:----|:----|
+|    |       2 | [3] | [6] |
+Partition number ° 6
+|    |   State | a   | b   |
+|:---|--------:|:----|:----|
+|    |       4 | [0] | [6] |
+
+The state 5 will be merged into the state 0 !
+
+Minimization done, the automaton is now:
+|     |   State | a   | b   |
+|:----|--------:|:----|:----|
+| I F |       0 | [1] | [6] |
+|     |       1 | [2] | [2] |
+|     |       2 | [3] | [6] |
+|     |       3 | [4] | [4] |
+|     |       4 | [0] | [6] |
+|     |       5 | [6] | [6] |
+
+What do you want to do?
+
+1- Standardisation
+2- Determinization and completion
+3- Minimization
+4- Read a word
+5- Complementary automaton
+6- Select another automaton
+0- Quit
+
 -> 4
 Input your word. (type 'end' to return to the menu)
 -> aaa

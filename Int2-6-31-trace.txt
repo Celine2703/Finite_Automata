@@ -61,6 +61,127 @@ What do you want to do?
 6- Select another automaton
 0- Quit
 
+-> 3
+The state [0] is renamed:  0
+The state [1, 4] is renamed:  1
+The state [3] is renamed:  2
+The state [2] is renamed:  3
+The state [5] is renamed:  4
+The state [7] is renamed:  5
+The state [1] is renamed:  6
+The state [6] is renamed:  7
+The state [4, 7] is renamed:  8
+
+Separating final states and other states:
+
+Partition number ° 1
+|    |   State | Ɛ   | a   | b   |
+|:---|--------:|:----|:----|:----|
+| F  |       5 | [9] | [9] | [9] |
+| F  |       8 | [9] | [9] | [4] |
+Partition number ° 2
+|    |   State | Ɛ   | a   | b   |
+|:---|--------:|:----|:----|:----|
+| I  |       0 | [1] | [9] | [9] |
+|    |       1 | [2] | [3] | [4] |
+|    |       2 | [5] | [9] | [2] |
+|    |       3 | [9] | [2] | [6] |
+|    |       4 | [9] | [9] | [7] |
+|    |       6 | [2] | [3] | [9] |
+|    |       7 | [8] | [9] | [9] |
+|    |       9 | [9] | [9] | [9] |
+
+First iteration of the minimisation:
+
+Partition number ° 1
+|    |   State | Ɛ   | a   | b   |
+|:---|--------:|:----|:----|:----|
+| F  |       5 | [9] | [9] | [9] |
+| F  |       8 | [9] | [9] | [4] |
+Partition number ° 2
+|    |   State | Ɛ   | a   | b   |
+|:---|--------:|:----|:----|:----|
+| I  |       0 | [1] | [9] | [9] |
+|    |       1 | [2] | [3] | [4] |
+|    |       3 | [9] | [2] | [6] |
+|    |       4 | [9] | [9] | [7] |
+|    |       6 | [2] | [3] | [9] |
+|    |       9 | [9] | [9] | [9] |
+Partition number ° 3
+|    |   State | Ɛ   | a   | b   |
+|:---|--------:|:----|:----|:----|
+|    |       2 | [5] | [9] | [2] |
+|    |       7 | [8] | [9] | [9] |
+
+ 2 nd iteration of the minimisation:
+
+Partition number ° 1
+|    |   State | Ɛ   | a   | b   |
+|:---|--------:|:----|:----|:----|
+| F  |       8 | [9] | [9] | [4] |
+Partition number ° 2
+|    |   State | Ɛ   | a   | b   |
+|:---|--------:|:----|:----|:----|
+| F  |       5 | [9] | [9] | [9] |
+Partition number ° 3
+|    |   State | Ɛ   | a   | b   |
+|:---|--------:|:----|:----|:----|
+|    |       4 | [9] | [9] | [7] |
+Partition number ° 4
+|    |   State | Ɛ   | a   | b   |
+|:---|--------:|:----|:----|:----|
+|    |       1 | [2] | [3] | [4] |
+Partition number ° 5
+|    |   State | Ɛ   | a   | b   |
+|:---|--------:|:----|:----|:----|
+|    |       7 | [8] | [9] | [9] |
+Partition number ° 6
+|    |   State | Ɛ   | a   | b   |
+|:---|--------:|:----|:----|:----|
+|    |       2 | [5] | [9] | [2] |
+Partition number ° 7
+|    |   State | Ɛ   | a   | b   |
+|:---|--------:|:----|:----|:----|
+|    |       3 | [9] | [2] | [6] |
+Partition number ° 8
+|    |   State | Ɛ   | a   | b   |
+|:---|--------:|:----|:----|:----|
+| I  |       0 | [1] | [9] | [9] |
+Partition number ° 9
+|    |   State | Ɛ   | a   | b   |
+|:---|--------:|:----|:----|:----|
+|    |       6 | [2] | [3] | [9] |
+Partition number ° 10
+|    |   State | Ɛ   | a   | b   |
+|:---|--------:|:----|:----|:----|
+|    |       9 | [9] | [9] | [9] |
+
+No changes, automaton already minimised at its best.
+
+Minimization done, the automaton is now:
+|    |   State | Ɛ   | a   | b   |
+|:---|--------:|:----|:----|:----|
+| I  |       0 | [1] | [9] | [9] |
+|    |       1 | [2] | [3] | [4] |
+|    |       2 | [5] | [9] | [2] |
+|    |       3 | [9] | [2] | [6] |
+|    |       4 | [9] | [9] | [7] |
+| F  |       5 | [9] | [9] | [9] |
+|    |       6 | [2] | [3] | [9] |
+|    |       7 | [8] | [9] | [9] |
+| F  |       8 | [9] | [9] | [4] |
+|    |       9 | [9] | [9] | [9] |
+
+What do you want to do?
+
+1- Standardisation
+2- Determinization and completion
+3- Minimization
+4- Read a word
+5- Complementary automaton
+6- Select another automaton
+0- Quit
+
 -> 4
 Input your word. (type 'end' to return to the menu)
 -> aaa

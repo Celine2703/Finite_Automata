@@ -55,6 +55,83 @@ What do you want to do?
 6- Select another automaton
 0- Quit
 
+-> 3
+
+Separating final states and other states:
+
+Partition number ° 1
+|    |   State | a   | b   |
+|:---|--------:|:----|:----|
+| F  |       3 | [3] | [3] |
+Partition number ° 2
+|    |   State | a   | b   |
+|:---|--------:|:----|:----|
+|    |       0 | [4] | [4] |
+| I  |       1 | [2] | [2] |
+|    |       2 | [0] | [3] |
+|    |       4 | [4] | [4] |
+
+First iteration of the minimisation:
+
+Partition number ° 1
+|    |   State | a   | b   |
+|:---|--------:|:----|:----|
+| F  |       3 | [3] | [3] |
+Partition number ° 2
+|    |   State | a   | b   |
+|:---|--------:|:----|:----|
+|    |       0 | [4] | [4] |
+| I  |       1 | [2] | [2] |
+|    |       4 | [4] | [4] |
+Partition number ° 3
+|    |   State | a   | b   |
+|:---|--------:|:----|:----|
+|    |       2 | [0] | [3] |
+
+ 2 nd iteration of the minimisation:
+
+Partition number ° 1
+|    |   State | a   | b   |
+|:---|--------:|:----|:----|
+| F  |       3 | [3] | [3] |
+Partition number ° 2
+|    |   State | a   | b   |
+|:---|--------:|:----|:----|
+|    |       4 | [4] | [4] |
+Partition number ° 3
+|    |   State | a   | b   |
+|:---|--------:|:----|:----|
+| I  |       1 | [2] | [2] |
+Partition number ° 4
+|    |   State | a   | b   |
+|:---|--------:|:----|:----|
+|    |       2 | [0] | [3] |
+Partition number ° 5
+|    |   State | a   | b   |
+|:---|--------:|:----|:----|
+|    |       0 | [4] | [4] |
+
+No changes, automaton already minimised at its best.
+
+Minimization done, the automaton is now:
+|    |   State | a   | b   |
+|:---|--------:|:----|:----|
+|    |       0 | [4] | [4] |
+| I  |       1 | [2] | [2] |
+|    |       2 | [0] | [3] |
+| F  |       3 | [3] | [3] |
+|    |       4 | [4] | [4] |
+
+What do you want to do?
+
+1- Standardisation
+2- Determinization and completion
+3- Minimization
+4- Read a word
+5- Complementary automaton
+6- Select another automaton
+0- Quit
+
 -> 4
 Input your word. (type 'end' to return to the menu)
 -> aaa
