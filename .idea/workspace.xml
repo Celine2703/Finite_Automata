@@ -48,7 +48,7 @@
       <workItem from="1679777776624" duration="18250000" />
       <workItem from="1679845673896" duration="1162000" />
       <workItem from="1679848695566" duration="641000" />
-      <workItem from="1679859535235" duration="2446000" />
+      <workItem from="1679859535235" duration="3520000" />
     </task>
     <servers />
   </component>
@@ -67,7 +67,7 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Finite_Automata$Int2_6_main.coverage" NAME="Int2-6-main Coverage Results" MODIFIED="1679861647225" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Finite_Automata$Int2_6_main.coverage" NAME="Int2-6-main Coverage Results" MODIFIED="1679862271231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Finite_Automata$algo.coverage" NAME="algo Coverage Results" MODIFIED="1679765679817" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Finite_Automata$Int2_6_init.coverage" NAME="Int2-6-init Coverage Results" MODIFIED="1679848854648" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Finite_Automata$FA.coverage" NAME="FA Coverage Results" MODIFIED="1679765635158" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

@@ -1,5 +1,6 @@
 from tabulate import tabulate
 
+# function that display partitions for minimization
 def display_partition(dico, init, final, alphabet, groups):
     partition_number = 0
     for i in range(-len(groups), len(groups)+1):

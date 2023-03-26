@@ -71,7 +71,7 @@ def main():
     test_automaton(dico, init, final, alphabet)
     y = -1
     minimized = False
-    while y != 0:
+    while y != 0: # y is the option the user choose
         print_menu()
         y = input("-> ")
         if y == '1':
@@ -131,7 +131,7 @@ def main():
                 algo.complementarisation(dico, init, final, alphabet)
                 disp.display_table(dico, init, final, alphabet, traduction, trueindex)
         elif y == '6':
-            main()
+            main() #loop to display the choose an automon again
         elif y == '0':
             print("Goodbye.\n")
             exit()
