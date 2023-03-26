@@ -1,5 +1,6 @@
 import copy
 import importlib.util
+
 # Import Int2-6-information
 info_spec = importlib.util.spec_from_file_location("Int2-6-information", "./Int2-6-information.py")
 info = importlib.util.module_from_spec(info_spec)
@@ -178,34 +179,6 @@ def list_transi (list_states, letter, dico):
     if ret == []:
         ret.append(-1)
     return ret
-
-def findtraduction(traduction ,transition):
-    out = []
-    for i in transition:
-        if (disp.get_key(i, traduction) != False):
-            tmp = disp.get_key(i, traduction)
-            s = tmp.strip('[]')  # supprimer les crochets du début et de la fin de la chaîne
-            lst = [int(x) for x in s.split(',')]
-            out = out + lst
-        else:
-            if (i not in out):
-                out.append(i)
-    out = list(set(out))
-    out.sort()
-    return out
-
-
-def find_new_states(dico, transition, elem):
-    dico[len(dico) - 1][elem] = []
-    for i in transition:
-        for state in dico[i][elem]:
-            if (state not in dico[len(dico) - 1][elem] and state != -1):
-                dico[len(dico) - 1][elem].append(state)
-        # if(i not in dico[len(dico) - 1][elem] and dico[i][elem] != [-1]):
-        #     dico[len(dico) - 1][elem] += dico[i][elem]
-    dico[len(dico) - 1][elem] = sorted(dico[len(dico) - 1][elem])
-    if (dico[len(dico) - 1][elem] == []):
-        dico[len(dico) - 1][elem] = [-1]
 
 def minimization(dico, init, final, alphabet):
     groups = []

@@ -66,6 +66,7 @@ def main():
     disp.display_table(dico, init, final, alphabet, traduction = None)
     test_automaton(dico, init, final, alphabet)
     y = -1
+    minimized = False
     while y != 0:
         print_menu()
         y = input("-> ")
@@ -93,6 +94,7 @@ def main():
             disp.display_table(dico, init, final, alphabet, traduction, trueindex)
         elif y == '3':
             dico, init, final = algo.minimization(dico, init, final, alphabet)
+            minimized = True
             disp.display_table(dico, init, final, alphabet, traduction)
         elif y == '4':
             print("Input your word. (type 'end' to return to the menu)")
@@ -109,8 +111,13 @@ def main():
                 print("The automaton is not deterministic, it cannot be complemented.")
             if(info.is_complete(dico, init, final, alphabet) != -1):
                 print("The automaton is not complete, it cannot be complemented.")
-            algo.complementarisation(dico, init, final, alphabet)
-            disp.display_table(dico, init, final, alphabet, traduction, trueindex)
+            if(info.is_deterministic(dico, init, final, alphabet) == -1 and info.is_complete(dico, init, final, alphabet) == -1):
+                if(minimized):
+                    print("Complementary automaton with the AFDCM:")
+                else:
+                    print("Complementary automaton with the AFDC:")
+                algo.complementarisation(dico, init, final, alphabet)
+                disp.display_table(dico, init, final, alphabet, traduction, trueindex)
         elif y == '6':
             main()
         elif y == '0':
