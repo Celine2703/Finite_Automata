@@ -1,5 +1,6 @@
 from tabulate import tabulate
 
+# function that creates a line for the table_to_display
 def display_ligne(dico, init, final, alphabet, i, traduction, trueindex):
     tab = []
     tab.append('')
@@ -37,6 +38,7 @@ def display_ligne(dico, init, final, alphabet, i, traduction, trueindex):
                 tab.append(dico[i][alphabet[j]])
     return (tab)
 
+# function that displays the automaton by creating a table with a header
 def display_table(dico, init, final, alphabet, traduction = None, trueindex = None):
     tab = []
     header = []
