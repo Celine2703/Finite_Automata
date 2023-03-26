@@ -1,6 +1,6 @@
 
 Which automaton do you want? (type 0 to quit)
--> 
+-> 1
 |     |   State |
 |:----|--------:|
 | I F |       0 |
@@ -18,7 +18,8 @@ What do you want to do?
 6- Select another automaton
 0- Quit
 
--> This automaton is already standard.
+-> 1
+This automaton is already standard.
 
 What do you want to do?
 
@@ -30,7 +31,8 @@ What do you want to do?
 6- Select another automaton
 0- Quit
 
--> This automaton is already deterministic and complete.
+-> 2
+This automaton is already deterministic and complete.
 
 |     |   State |
 |:----|--------:|
@@ -46,12 +48,29 @@ What do you want to do?
 6- Select another automaton
 0- Quit
 
--> Input your word. (type 'end' to return to the menu)
--> No: this word has not been recognized!
-Another word? (type 'end' to return to the menu)
--> No: this word has not been recognized!
-Another word? (type 'end' to return to the menu)
--> 
+-> 3
+
+Separating final states and other states:
+
+Partition number ° 1
+|     |   State |
+|:----|--------:|
+| I F |       0 |
+
+First iteration of the minimisation:
+
+Partition number ° 1
+|     |   State |
+|:----|--------:|
+| I F |       0 |
+
+No changes, automaton already minimised at it's best.
+
+Minimization done, the automaton is now:
+|     |   State |
+|:----|--------:|
+| I F |       0 |
+
 What do you want to do?
 
 1- Standardisation
@@ -62,7 +81,27 @@ What do you want to do?
 6- Select another automaton
 0- Quit
 
--> Complementary automaton with the CDFA:
+-> 4
+Input your word. (type 'end' to return to the menu)
+-> aaa
+No: this word has not been recognized!
+Another word? (type 'end' to return to the menu)
+-> abab
+No: this word has not been recognized!
+Another word? (type 'end' to return to the menu)
+-> end
+What do you want to do?
+
+1- Standardisation
+2- Determinization and completion
+3- Minimization
+4- Read a word
+5- Complementary automaton
+6- Select another automaton
+0- Quit
+
+-> 5
+Complementary automaton with the CDFA:
 
 |    |   State |
 |:---|--------:|
@@ -78,5 +117,6 @@ What do you want to do?
 6- Select another automaton
 0- Quit
 
--> Goodbye.
+-> 0
+Goodbye.
 

@@ -1,6 +1,6 @@
 
 Which automaton do you want? (type 0 to quit)
--> 
+-> 16
 |    |   State | a      | b      | c      | d      |
 |:---|--------:|:-------|:-------|:-------|:-------|
 | F  |       0 | --     | --     | --     | --     |
@@ -22,7 +22,8 @@ What do you want to do?
 6- Select another automaton
 0- Quit
 
--> Standardization done, the automaton is now:
+-> 1
+Standardization done, the automaton is now:
 
 |    |   State | a      | b      | c      | d      |
 |:---|--------:|:-------|:-------|:-------|:-------|
@@ -43,7 +44,8 @@ What do you want to do?
 6- Select another automaton
 0- Quit
 
--> Determinization and completion done, the automaton is now:
+-> 2
+Determinization and completion done, the automaton is now:
 
 |    | State   | a     | b     | c     | d     |
 |:---|:--------|:------|:------|:------|:------|
@@ -64,19 +66,15 @@ What do you want to do?
 6- Select another automaton
 0- Quit
 
--> Input your word. (type 'end' to return to the menu)
--> [1]
-[1]
-[1]
+-> 4
+Input your word. (type 'end' to return to the menu)
+-> aaa
 No: this word has not been recognized!
 Another word? (type 'end' to return to the menu)
--> [1]
-[2]
-[5]
-[5]
+-> abab
 No: this word has not been recognized!
 Another word? (type 'end' to return to the menu)
--> 
+-> end
 What do you want to do?
 
 1- Standardisation
@@ -87,7 +85,8 @@ What do you want to do?
 6- Select another automaton
 0- Quit
 
--> Complementary automaton with the CDFA:
+-> 5
+Complementary automaton with the CDFA:
 
 |     | State   | a     | b     | c     | d     |
 |:----|:--------|:------|:------|:------|:------|
@@ -108,5 +107,6 @@ What do you want to do?
 6- Select another automaton
 0- Quit
 
--> Goodbye.
+-> 0
+Goodbye.
 
