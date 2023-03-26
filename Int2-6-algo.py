@@ -77,7 +77,6 @@ def init_determinization(dico, init, final, alphabet, traduction):
     list_init = list_init_states(init)
     if (alphabet[0] == '€'):
         list_init = add_empty_list(dico, list_init)
-        print (list_init)
         for k in (list_init):
             if (final[k]):
                 fin = 1

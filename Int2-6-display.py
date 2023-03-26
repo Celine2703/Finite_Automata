@@ -45,7 +45,10 @@ def display_table(dico, init, final, alphabet, traduction = None, trueindex = No
     header.append('')
     header.append('State')
     for i in range(len(alphabet)):
-        header.append(alphabet[i])
+        if(alphabet[i] == '€'):
+            header.append('ε')
+        else:
+            header.append(alphabet[i])
     for i in range(len(dico)):
         tab.append(display_ligne(dico, init, final, alphabet, i, traduction, trueindex))
     print(tabulate(tab, headers=header, tablefmt='pipe'))
