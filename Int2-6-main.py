@@ -71,7 +71,6 @@ def main():
     test_automaton(dico, init, final, alphabet)
     y = -1
     minimized = False
-    determinized = False
     while y != 0:
         print_menu()
         y = input("-> ")
@@ -97,9 +96,12 @@ def main():
                     dico, init, final = algo.completion(dico, init, final, alphabet)
                     print("Determinization and completion done, the automaton is now:")
             disp.display_table(dico, init, final, alphabet, traduction, trueindex)
-            determinized = True
         elif y == '3':
-            if determinized:
+            if(info.is_deterministic(dico, init, final, alphabet) != -1):
+                print("The automaton is not deterministic, it cannot be complemented.")
+            if(info.is_complete(dico, init, final, alphabet) != -1):
+                print("The automaton is not complete, it cannot be complemented.")
+            if(info.is_deterministic(dico, init, final, alphabet) == -1 and info.is_complete(dico, init, final, alphabet) == -1):
                 dico, init, final, trueindex = algo.minimization(dico, init, final, alphabet, trueindex)
                 minimized = True
                 print("\nMinimization done, the automaton is now:")
@@ -123,9 +125,9 @@ def main():
                 print("The automaton is not complete, it cannot be complemented.")
             if(info.is_deterministic(dico, init, final, alphabet) == -1 and info.is_complete(dico, init, final, alphabet) == -1):
                 if(minimized):
-                    print("Complementary automaton with the AFDCM:")
+                    print("Complementary automaton with the MCDFA:")
                 else:
-                    print("Complementary automaton with the AFDC:")
+                    print("Complementary automaton with the CDFA:")
                 algo.complementarisation(dico, init, final, alphabet)
                 disp.display_table(dico, init, final, alphabet, traduction, trueindex)
         elif y == '6':
