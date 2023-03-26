@@ -347,15 +347,16 @@ def minimization(dico, init, final, alphabet):
                     for j in range(len(dico[list_index[0]].get(lettre))):
                         if dico[list_index[0]].get(lettre)[j] == remove_element:
                             dico[list_index[0]].get(lettre)[j] = list_index[0]
-        for remove_element in list_index[1:]:
-            print("The state", remove_element, "will be merge into the state", list_index[0], "!")
-            dico.remove(dico[remove_element])
-            if final[remove_element] == 1:
+        for i in range(1,len(list_index)):
+            print(i)
+            print("The state", list_index[-i], "will be merge into the state", list_index[0], "!")
+            del dico[list_index[-i]]
+            if final[list_index[-i]] == 1:
                 final[list_index[0]] = 1
-            final.remove(final[remove_element])
-            if init[remove_element] == 1:
+            del final[list_index[-i]]
+            if init[list_index[-i]] == 1:
                 init[list_index[0]] = 1
-            init.remove(init[remove_element])
+            del init[list_index[-i]]
 
     return dico, init, final
 
