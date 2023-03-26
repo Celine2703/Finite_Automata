@@ -210,6 +210,7 @@ def list_transi (list_states, letter, dico):
     return ret
 
 def minimization(dico, init, final, alphabet, trueindex):
+    minimization_change = 0
     # displaying changements in name of states
     for i in range(len(trueindex)):
         print("The state", disp.get_key(i, trueindex), "is renamed: ", i)
@@ -220,6 +221,9 @@ def minimization(dico, init, final, alphabet, trueindex):
             groups.append(1)
         else:
             groups.append(-1)
+    print("\nSeparating final states and other states:\n")
+    disp.display_partition(dico, init, final, alphabet, groups)
+    time.sleep(1)
     # first step: separating on the pattern of states of arrivals (NT / T)
     pattern = []
     for i in range(len(dico)):
@@ -250,7 +254,7 @@ def minimization(dico, init, final, alphabet, trueindex):
                     if groups[i] > 0:
                         groups[i] = groups[j]
     # displaying partitions of this first separation
-    print("First iteration of the minimisation:")
+    print("\nFirst iteration of the minimisation:\n")
     disp.display_partition(dico, init, final, alphabet, groups)
     time.sleep(1)
     # 2nd step: separating depending on 1) if states of arrival belongs to the group of the state we are on
@@ -357,6 +361,7 @@ def minimization(dico, init, final, alphabet, trueindex):
                             dico[list_index[0]].get(lettre)[j] = list_index[0]
         for i in range(1,len(list_index)):
             print("\nThe state", list_index[-i], "will be merge into the state", list_index[0], "!")
+            minimization_change = 1
             list_of_removed_index.append(list_index[-1])
             del dico[list_index[-i]]
             if final[list_index[-i]] == 1:
@@ -373,6 +378,8 @@ def minimization(dico, init, final, alphabet, trueindex):
             change += 1
         i_list = [i+change]
         trueindex_new[str(i_list)]=i
+    if minimization_change == 0:
+        print("\nNo changes, automaton already minimised at it's best.")
     #displaying changements in name of states
     return dico, init, final, trueindex_new
 
