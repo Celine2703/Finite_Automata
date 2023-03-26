@@ -20,7 +20,7 @@ ini_spec = importlib.util.spec_from_file_location("Int2-6-init", "./Int2-6-init.
 ini = importlib.util.module_from_spec(ini_spec)
 ini_spec.loader.exec_module(ini)
 
-
+# function that prints the menu
 def print_menu():
     print("\nWhat do you want to do?\n")
     print("1- Standardisation")
@@ -31,6 +31,7 @@ def print_menu():
     print("6- Select another automaton")
     print("0- Quit\n")
 
+# fuction that tests if the automaton is standard, deterministic and complete and print the matching message
 def test_automaton(dico, init, final, alphabet):
     x = info.is_standard(dico, init, final, alphabet)
     if x == -1:
