@@ -59,10 +59,14 @@ def display_ligne(dico, init, final, alphabet, i, traduction, trueindex, donot):
             tab.append('--')
         else:
             if traduction and donot:
-                key = get_key(int(str(dico[i][alphabet[j]]).replace("[", "").replace("]", "")), trueindex)
-                if key:
-                    tab.append(key.replace(", ", "·"))
+                if trueindex != None:
+                    key = get_key(int(str(dico[i][alphabet[j]]).replace("[", "").replace("]", "")), trueindex)
+                    if key:
+                        tab.append(key.replace(", ", "·"))
+                    else:
+                        tab.append(dico[i][alphabet[j]])
                 else:
+                    key = traduction.get(str(dico[i][alphabet[j]]))
                     tab.append(dico[i][alphabet[j]])
             else:
                 tab.append(dico[i][alphabet[j]])

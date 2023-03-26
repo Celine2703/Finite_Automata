@@ -64,14 +64,12 @@ def completion(dico, init, final, alphabet):
 
 # fuction that create the initial state of the deterministic automaton
 def init_determinization(dico, init, final, alphabet, traduction):
-    traduction = {}
     new_dico = []
     new_init = []
     new_final = []
-    traduction = {}
     trueindex = {}
     fin =0
-        #add a new state
+    #add a new state
    
     new_init.append(1)
     new_dico.append({})
@@ -93,8 +91,13 @@ def init_determinization(dico, init, final, alphabet, traduction):
         else:
             new_final.append(0)
         list_init.sort()
-        traduction[str(list_init)] = list_init
-        trueindex[str(list_init)] = 0        
+        if (traduction != {}):
+            key = disp.get_key(int(str(list_init).replace("[","").replace("]","")), traduction)
+            if (key):
+                traduction[str(list_init)] = key
+                trueindex[key] = 0
+        else: 
+            trueindex[str(list_init)] = 0        
     
     # add the transitions to the new state
     for state in list_init:
@@ -143,6 +146,8 @@ def determinization2(dico, init, final, alphabet, traduction):
             #not adding the transition for the empty word or an empty transition
             if (lettre == '€'): 
                 continue
+            if (state.get(lettre) == None):
+                state[lettre] = [-1]
             for transition in state[lettre]:
                 if transition == -1:
                     continue
@@ -179,8 +184,7 @@ def determinization2(dico, init, final, alphabet, traduction):
                         state[lettre] = list (set(state[lettre]))
                         state[lettre].sort()
                         new_dico[(trueindex[str(state[lettre])])][newletter] = list(set(new_dico[(trueindex[str(state[lettre])])][newletter]))
-                        new_dico[(trueindex[str(state[lettre])])][newletter].sort()
-                       
+                        new_dico[(trueindex[str(state[lettre])])][newletter].sort()                       
                     if (new_dico[(trueindex[str(state[lettre])])][newletter] == []):
                         new_dico[(trueindex[str(state[lettre])])][newletter] = [-1]
 

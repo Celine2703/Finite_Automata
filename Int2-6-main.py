@@ -1,3 +1,4 @@
+# 
 import importlib.util
 
 # Import Int2-6-information
@@ -57,7 +58,7 @@ def test_automaton(dico, init, final, alphabet):
 
 
 def main():
-    trueindex = 0
+    trueindex = None
     # the menu of our program
     print("\nWhich automaton do you want? (type 0 to quit)")
     x = input("-> ")
